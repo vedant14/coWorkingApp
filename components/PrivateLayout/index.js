@@ -1,0 +1,34 @@
+import { SEO } from "../SEO";
+import { useAuth } from "../../context/AuthContext";
+import { PageLoader } from "../PageLoader";
+import { SideBar } from "../SideBar";
+import { Header } from "../Header";
+
+export function PrivateLayout({ title, description, children }) {
+  const { uniqueId, currentUser } = useAuth();
+  if (!uniqueId || !currentUser) {
+    return <PageLoader />;
+  } else {
+    return <LayoutContent />;
+  }
+
+  function LayoutContent() {
+    return (
+      <div className="relative">
+        <SEO title={title} description={description} />
+        <Header />
+        <SideBar />
+        <div className="md:pl-64 pt-16 flex flex-col min-h-screen flex-1 bg-white-700">
+          <main>
+            <div className="py-6">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                {/* Replace with your content */}
+                <div className="py-4">{children}</div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
+}

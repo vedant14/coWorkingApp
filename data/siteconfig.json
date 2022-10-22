@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Dashboard",
+    "inactiveIcon": "/icons/menu-inactive/home.svg",
+    "activeIcon": "/icons/menu-active/home.svg",
+    "link": "/dashboard"
+  },
+  {
+    "name": "Bookings",
+    "inactiveIcon": "/icons/menu-inactive/phone.svg",
+    "activeIcon": "/icons/menu-active/phone.svg",
+    "link": "/bookings"
+  },
+  {
+    "name": "Schedule",
+    "inactiveIcon": "/icons/menu-inactive/calendar.svg",
+    "activeIcon": "/icons/menu-active/calendar.svg",
+    "link": "/schedule"
+  },
+  {
+    "name": "Profile",
+    "inactiveIcon": "/icons/menu-inactive/profile.svg",
+    "activeIcon": "/icons/menu-active/profile.svg",
+    "link": "/profile"
+  }
+]
