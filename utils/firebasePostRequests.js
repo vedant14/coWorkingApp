@@ -136,15 +136,30 @@ export async function createBrand({ name, uniqueId }) {
   };
   await setDoc(newBrandRef, brandData)
     .then(() => {
-      // createBrandUser()
-      console.log(doc.data);
-      toastNotification("Brand Created", "Add locations now", "success");
+      createBrandUser(uniqueId, newBrandRef.id, true);
     })
     .catch((error) => {
       toastNotification("Oops something is wrong", error.message, "danger");
     });
 }
 
+export async function createBrandUser(uniqueId, brandId, role) {
+  const newBrandUserRef = doc(collection(db, "brand_users"));
+  const brandUserData = {
+    userId: uniqueId,
+    brandId: brandId,
+    admin: role,
+    staff: true,
+    createdAt: Timestamp.now(),
+  };
+  await setDoc(newBrandUserRef, brandUserData)
+    .then(() => {
+      toastNotification("Brand Created", "Add locations now", "success");
+    })
+    .catch((error) => {
+      toastNotification("Oops something is wrong", error.message, "danger");
+    });
+}
 // slug: slugify(
 //   firstName + lastName + "-" + Math.random().toString(36).slice(6)
 // ),

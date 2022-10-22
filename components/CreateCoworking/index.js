@@ -5,8 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
 export function CreateCoworking() {
   const [name, setName] = useState("");
-  const { uniqueId, currentUser } = useAuth;
-
+  const { uniqueId } = useAuth();
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "") {

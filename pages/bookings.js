@@ -3,7 +3,7 @@ import { PrivateLayout, UpcomingBookings } from "../components";
 export default function Bookings() {
   return (
     <PrivateLayout>
-      <UpcomingBookings />
+      <div>Vedant</div>
     </PrivateLayout>
   );
 }

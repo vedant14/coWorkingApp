@@ -18,6 +18,45 @@ export async function getUserProfile(setCurrentUser, uniqueId) {
   }
 }
 
+export async function getAdminBrandData(uniqueId, brandData, setBrandData) {
+  const brandUserRef = query(
+    collection(db, "brand_users"),
+    where("userId", "==", uniqueId)
+  );
+  const querySnapshot = await getDocs(brandUserRef);
+  querySnapshot.docs.map((doc) => {
+    if (querySnapshot.docs.length !== 0) {
+      getBrandName(doc.data().brandId, function (brandName) {
+        setBrandData((brandData) => [
+          ...brandData,
+          {
+            id: doc.data().brandId,
+            brandName: brandName.name,
+          },
+        ]);
+      });
+    } else {
+      console.log("NOTING");
+    }
+  });
+}
+
+export async function getBrandName(brandId, callback) {
+  const brandDataRef = doc(db, "brands", brandId);
+  const querySnapshot = await getDoc(brandDataRef);
+  if (querySnapshot) {
+    return callback(querySnapshot.data());
+  }
+}
+
+export async function getBrandDetails(brandId, setBrandData) {
+  const brandDataRef = doc(db, "brands", brandId);
+  const querySnapshot = await getDoc(brandDataRef);
+  if (querySnapshot) {
+    setBrandData(querySnapshot.data());
+  }
+}
+
 export async function getEditScheduleData(uniqueId, setEditData) {
   const scheduleRef = doc(db, "user_slots", uniqueId);
   const querySnapshot = await getDoc(scheduleRef);
