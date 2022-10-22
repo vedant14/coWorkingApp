@@ -1,6 +1,6 @@
 import { useState } from "react";
 import timeSlots from "../../data/timeSlots.json";
-import { Store } from "react-notifications-component";
+import { toastNotification } from "../atoms/toastNotification";
 export function SelectionField({
   i,
   day,
@@ -22,19 +22,11 @@ export function SelectionField({
       if (parseInt(value) < modifiedDayValue[day].slots[slotValue].endTime) {
         modifiedDayValue[day].slots[slotValue].startTime = parseInt(value);
       } else {
-        Store.addNotification({
-          title: "Error!",
-          message: "Start time cannot be more than or equal to end time",
-          type: "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
+        toastNotification(
+          "Error",
+          "Start time cannot be more than or equal to end time",
+          "danger"
+        );
       }
     } else {
       modifiedDayValue[day].slots.push({
@@ -53,19 +45,11 @@ export function SelectionField({
       if (parseInt(value) > modifiedDayValue[day].slots[slotValue].startTime) {
         modifiedDayValue[day].slots[slotValue].endTime = parseInt(value);
       } else {
-        Store.addNotification({
-          title: "Error!",
-          message: "End time cannot be less than or equal to start time",
-          type: "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
+        toastNotification(
+          "Error",
+          "End time cannot be less than or equal to start time",
+          "danger"
+        );
       }
     } else {
       modifiedDayValue[day].slots.push({

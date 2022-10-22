@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { AvailabilityInput } from "./availabilityInput";
 import { useAuth } from "../../context/AuthContext";
 import { saveSlotData } from "../../utils/firebasePostRequests";
-import { Store } from "react-notifications-component";
 
 export function UserAvailabilityComponent({ editData }) {
   const { uniqueId } = useAuth();

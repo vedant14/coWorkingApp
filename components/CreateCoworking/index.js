@@ -16,7 +16,7 @@ export function CreateCoworking() {
         "danger"
       );
     } else {
-      createBrand({ name, uniqueId, Store });
+      createBrand({ name, uniqueId });
     }
   }
   return (

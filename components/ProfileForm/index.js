@@ -7,7 +7,7 @@ import {
 import { InputText } from "../atoms/inputText";
 import { InputTextArea } from "../atoms/inputTextArea";
 import { MultiSelectOptions } from "../atoms/multiSelect";
-import { Store } from "react-notifications-component";
+import { toastNotification } from "../atoms/toastNotification";
 export function ProfileForm() {
   const { uniqueId, currentUser } = useAuth();
   const [firstName, setFirstName] = useState(currentUser.firstName);
@@ -40,60 +40,21 @@ export function ProfileForm() {
   function callSaveProfile(e) {
     e.preventDefault();
     if (isNumeric(amount) === false) {
-      Store.addNotification({
-        title: "Amount can only be a number!",
-        message:
-          "Amount field accepts integers or numbers with max. 2 decimal points",
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      toastNotification(
+        "Amount can only be a number!",
+        "Amount field accepts integers or numbers with max. 2 decimal points",
+        "danger"
+      );
     } else if (slug === "") {
-      Store.addNotification({
-        title: "Unique URL cannot be empty!",
-        message: "Set a unique URL so that people can find you",
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      toastNotification(
+        "Unique URL cannot be empty!",
+        "Set a unique URL so that people can find you",
+        "danger"
+      );
     } else if (firstName === "") {
-      Store.addNotification({
-        title: "First name cannot be empty!",
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      toastNotification("First name cannot be empty!", " ", "danger");
     } else if (lastName === "") {
-      Store.addNotification({
-        title: "Last name cannot be empty!",
-        type: "danger",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      toastNotification("Last name cannot be empty!", " ", "danger");
     } else {
       updateUserProfile({
         userId: uniqueId,
@@ -107,7 +68,6 @@ export function ProfileForm() {
         profileForm: true,
         profilePic: profilePic === null ? false : profilePic,
         mentorServices: mentorServices,
-        Store: Store,
       });
     }
   }
@@ -126,8 +86,7 @@ export function ProfileForm() {
       e.target.files[0],
       uniqueId,
       currentUser.email,
-      setProfilePic,
-      Store
+      setProfilePic
     );
   }
 
@@ -135,18 +94,7 @@ export function ProfileForm() {
     navigator.clipboard.writeText(
       `${process.env.NEXT_PUBLIC_URL}/book/${currentUser.slug}`
     );
-    Store.addNotification({
-      title: "URL Copied!",
-      type: "success",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
+    toastNotification("URL Copied", "", "success");
   }
 
   function addServiceInput(e) {
