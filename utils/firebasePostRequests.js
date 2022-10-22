@@ -129,6 +129,9 @@ export async function updateUserProfile({
   }
 }
 
+// slug: slugify(
+//   firstName + lastName + "-" + Math.random().toString(36).slice(6)
+// ),
 async function verifySlugFuntion(userId, slug) {
   if (slug) {
     const slugRef = query(
@@ -189,10 +192,8 @@ export async function createUserProfile(
     email: userEmail,
     firstName: firstName,
     lastName: lastName,
-    slug: slugify(
-      firstName + lastName + "-" + Math.random().toString(36).slice(6)
-    ),
     createdAt: Timestamp.now(),
+    merchant: false,
   };
   await setDoc(userDoc, userDocData)
     .then(() => {

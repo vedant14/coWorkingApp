@@ -11,37 +11,49 @@ export function SideBar() {
     return classes.filter(Boolean).join(" ");
   }
 
+  function ItemName({ item }) {
+    return (
+      <Link href={item.link}>
+        <li
+          className={classNames(
+            router.pathname === `${item.link}`
+              ? "text-dark-green"
+              : "text-neutral-400",
+            "cursor-pointer hover:opacity-80 flex items-center group flex px-2 py-2 text-base font-medium rounded-md "
+          )}
+        >
+          <img
+            src={item.inactiveIcon}
+            className={classNames(
+              router.pathname === `${item.link}` && "hidden",
+              "mr-4 flex-shrink-0 h-6 w-6"
+            )}
+          />
+          <img
+            src={item.activeIcon}
+            className={classNames(
+              router.pathname !== `${item.link}` && "hidden",
+              "mr-4 flex-shrink-0 h-6 w-6"
+            )}
+          />
+          <p>{item.name}</p>
+        </li>
+      </Link>
+    );
+  }
+
   return (
     <div className="hidden bg-neutral-50 md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="mt-20 flex-1 h-0 overflow-y-auto">
         <ul className="py-4 pl-6 pr-2 space-y-4">
           {siteData.map((item, i) => (
-            <Link key={i} href={item.link}>
-              <li
-                className={classNames(
-                  router.pathname === `${item.link}`
-                    ? "text-dark-green"
-                    : "text-neutral-400",
-                  "cursor-pointer hover:opacity-80 flex items-center group flex px-2 py-2 text-base font-medium rounded-md "
-                )}
-              >
-                <img
-                  src={item.inactiveIcon}
-                  className={classNames(
-                    router.pathname === `${item.link}` && "hidden",
-                    "mr-4 flex-shrink-0 h-6 w-6"
-                  )}
-                />
-                <img
-                  src={item.activeIcon}
-                  className={classNames(
-                    router.pathname !== `${item.link}` && "hidden",
-                    "mr-4 flex-shrink-0 h-6 w-6"
-                  )}
-                />
-                <p>{item.name}</p>
-              </li>
-            </Link>
+            <div key={i}>
+              {item.merchant === true ? (
+                currentUser.merchant === true && <ItemName item={item} />
+              ) : (
+                <ItemName item={item} />
+              )}
+            </div>
           ))}
         </ul>
         <div className="absolute w-full bottom-10 px-6 ">

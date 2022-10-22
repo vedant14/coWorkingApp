@@ -3,24 +3,28 @@
     "name": "Dashboard",
     "inactiveIcon": "/icons/menu-inactive/home.svg",
     "activeIcon": "/icons/menu-active/home.svg",
-    "link": "/dashboard"
+    "link": "/dashboard",
+    "merchant": false
   },
   {
     "name": "Bookings",
     "inactiveIcon": "/icons/menu-inactive/phone.svg",
     "activeIcon": "/icons/menu-active/phone.svg",
-    "link": "/bookings"
+    "link": "/bookings",
+    "merchant": true
   },
   {
     "name": "Schedule",
     "inactiveIcon": "/icons/menu-inactive/calendar.svg",
     "activeIcon": "/icons/menu-active/calendar.svg",
-    "link": "/schedule"
+    "link": "/schedule",
+    "merchant": true
   },
   {
     "name": "Profile",
     "inactiveIcon": "/icons/menu-inactive/profile.svg",
     "activeIcon": "/icons/menu-active/profile.svg",
-    "link": "/profile"
+    "link": "/profile",
+    "merchant": false
   }
 ]

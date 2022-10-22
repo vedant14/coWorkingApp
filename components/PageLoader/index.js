@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
+import { signOutUser } from "../../utils/firebaseUserRequests";
 
 export function PageLoader() {
   const router = useRouter();
   useEffect(() => {
     const timeId = setTimeout(() => {
       router.push("/");
+      signOutUser();
     }, 5000);
     return () => {
       clearTimeout(timeId);
