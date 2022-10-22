@@ -12,7 +12,31 @@ import {
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "./firebaseConfig";
 import Router from "next/router";
+import { toastNotification } from "../components/atoms/toastNotification";
 
+export async function createUserProfile(
+  userId,
+  firstName,
+  lastName,
+  userEmail,
+  setError
+) {
+  const userDoc = doc(db, "user_profile", userId);
+  const userDocData = {
+    email: userEmail,
+    firstName: firstName,
+    lastName: lastName,
+    createdAt: Timestamp.now(),
+    merchant: false,
+  };
+  await setDoc(userDoc, userDocData)
+    .then(() => {
+      Router.push("/dashboard");
+    })
+    .catch((error) => {
+      setError(error.message);
+    });
+}
 export async function updateUserProfile({
   userId,
   firstName,
@@ -27,25 +51,16 @@ export async function updateUserProfile({
   profileForm,
   profilePic,
   mentorServices,
-  Store,
 }) {
   const userDoc = doc(db, "user_profile", userId);
   const userSnapShot = await getDoc(userDoc);
   const verifySlug = await verifySlugFuntion(userId, slug);
   if (slug && verifySlug === false) {
-    Store.addNotification({
-      title: "Error",
-      message: "Sorry, this url is already taken",
-      type: "danger",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
+    toastNotification(
+      "Oops, something is not right",
+      "This URL is already taken",
+      "danger"
+    );
   } else {
     const userDocData = {
       email: userEmail ? userEmail : userSnapShot.data().email,
@@ -94,39 +109,40 @@ export async function updateUserProfile({
     await setDoc(userDoc, userDocData)
       .then(() => {
         if (profileForm === true) {
-          Store.addNotification({
-            title: "Profile Updated!",
-            message: "Please refresh this page to load the new changes",
-            type: "success",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-            },
-          });
+          toastNotification(
+            "Profile updated",
+            "Please refresh this page to load the new changes",
+            "success"
+          );
         } else {
           Router.push("/dashboard");
         }
       })
       .catch((error) => {
-        Store.addNotification({
-          title: "Error",
-          message: error.message,
-          type: "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
+        toastNotification(
+          "Oops something is not right",
+          error.message,
+          "danger"
+        );
       });
   }
+}
+
+export async function createBrand({ name, uniqueId }) {
+  const newBrandRef = doc(collection(db, "brands"));
+  const brandData = {
+    name: name,
+    createdAt: Timestamp.now(),
+  };
+  await setDoc(newBrandRef, brandData)
+    .then(() => {
+      // createBrandUser()
+      console.log(doc.data);
+      toastNotification("Brand Created", "Add locations now", "success");
+    })
+    .catch((error) => {
+      toastNotification("Oops something is wrong", error.message, "danger");
+    });
 }
 
 // slug: slugify(
@@ -153,7 +169,7 @@ async function verifySlugFuntion(userId, slug) {
   }
 }
 
-export async function saveSlotData(uniqueId, userAvailability, Store) {
+export async function saveSlotData(uniqueId, userAvailability) {
   const userSlotRef = doc(db, "user_slots", uniqueId);
   const userSlotData = {
     updatedAt: Timestamp.now(),
@@ -161,46 +177,14 @@ export async function saveSlotData(uniqueId, userAvailability, Store) {
   };
   await setDoc(userSlotRef, userSlotData)
     .then(() => {
-      Store.addNotification({
-        title: "Schedule Updated!",
-        message: "Your new schedule has been updated",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      });
+      toastNotification(
+        "Schedule Updated",
+        "Your new schedule has been updated",
+        "success"
+      );
     })
     .catch((error) => {
       console.error(error.message);
-    });
-}
-
-export async function createUserProfile(
-  userId,
-  firstName,
-  lastName,
-  userEmail,
-  setError
-) {
-  const userDoc = doc(db, "user_profile", userId);
-  const userDocData = {
-    email: userEmail,
-    firstName: firstName,
-    lastName: lastName,
-    createdAt: Timestamp.now(),
-    merchant: false,
-  };
-  await setDoc(userDoc, userDocData)
-    .then(() => {
-      Router.push("/dashboard");
-    })
-    .catch((error) => {
-      setError(error.message);
     });
 }
 
@@ -246,23 +230,15 @@ export async function uploadUserProfilePic(
   file,
   uniqueId,
   email,
-  setProfilePic,
-  Store
+  setProfilePic
 ) {
   setProfilePic(null);
-  Store.addNotification({
-    title: "Uploading profile pic!",
-    message: "Give us a few seconds to upload the profile pic",
-    type: "success",
-    insert: "top",
-    container: "top-right",
-    animationIn: ["animate__animated", "animate__fadeIn"],
-    animationOut: ["animate__animated", "animate__fadeOut"],
-    dismiss: {
-      duration: 5000,
-      onScreen: true,
-    },
-  });
+  toastNotification(
+    "Uploading profile pic",
+    "Give us a few seconds to upload the profile pic",
+    "success"
+  );
+
   const storage = getStorage();
   const storageRef = ref(storage, `profileUploads/${uniqueId}/profilePic`);
   // 'file' comes from the Blob or File API

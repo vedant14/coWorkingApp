@@ -9,3 +9,4 @@ export * from "./MentorIntro";
 export * from "./ServiceList";
 export * from "./UpcomingBookings";
 export * from "./ProfileForm";
+export * from "./CreateCoworking";
