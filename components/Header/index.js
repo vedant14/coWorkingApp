@@ -13,10 +13,6 @@ export function Header() {
         />
       </div>
       <div className="text-dark-green my-auto hidden md:inline-flex font-medium items-center ml-auto pr-16 space-x-4">
-        {/* <div className="bg-neutral-200 rounded-md py-2.5 px-2 flex items-center space-x-1">
-          <img src="/icons/display/rupee.svg" alt="Rupee" />
-          <p className="text-sm"> Total earnings: 100</p>
-        </div> */}
         <div className="flex items-center space-x-2">
           {!currentUser.profilePic || currentUser.profilePic === false ? (
             <img

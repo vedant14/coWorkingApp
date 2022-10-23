@@ -142,6 +142,20 @@ export async function createBrand({ name, uniqueId }) {
       toastNotification("Oops something is wrong", error.message, "danger");
     });
 }
+export async function updateBrand({ name, brandId }) {
+  const updateBrandRef = doc(db, "brands", brandId);
+  const brandData = {
+    name: name,
+    updatedAt: Timestamp.now(),
+  };
+  await setDoc(updateBrandRef, brandData)
+    .then(() => {
+      toastNotification("Brand Update", "Data is updated", "success");
+    })
+    .catch((error) => {
+      toastNotification("Oops something is wrong", error.message, "danger");
+    });
+}
 
 export async function createBrandUser(uniqueId, brandId, role) {
   const newBrandUserRef = doc(collection(db, "brand_users"));

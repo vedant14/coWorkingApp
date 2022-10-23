@@ -8,6 +8,8 @@ export function PageHeading({
   breadcrumbs,
   primaryText,
   primaryLink,
+  secondaryText,
+  secondaryLink,
 }) {
   const router = useRouter();
   function CustomBreadcrumb({ name, link }) {
@@ -62,6 +64,16 @@ export function PageHeading({
           <p className="text-neutral-500"> {subtext}</p>
         </div>
         <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+          {secondaryLink && (
+            <Link href={secondaryLink}>
+              <button
+                type="button"
+                className="ml-3 inline-flex items-center px-4 py-2 border border-dark-green rounded-md shadow-sm text-sm font-medium text-dark-green bg-neutral-50 hover:border-dark-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-green"
+              >
+                {secondaryText}
+              </button>
+            </Link>
+          )}
           {primaryLink && (
             <Link href={primaryLink}>
               <button

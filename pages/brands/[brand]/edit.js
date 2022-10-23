@@ -1,14 +1,14 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {
+  CreateCoworking,
   NoDataPage,
   PageHeading,
   PageLoader,
   PrivateLayout,
 } from "../../../components";
 import { getBrandDetails } from "../../../utils/firebaseGetRequest";
-
-export default function BrandPage() {
+export default function Edit() {
   const router = useRouter();
   const [brandData, setBrandData] = useState(null);
   const { brand } = router.query;
@@ -17,7 +17,6 @@ export default function BrandPage() {
       getBrandDetails(brand, setBrandData);
     }
   }, [brand]);
-
   if (brandData === false) {
     return <NoDataPage />;
   } else if (!brandData) {
@@ -29,23 +28,18 @@ export default function BrandPage() {
   function ShowBrandPage() {
     const breadCrumbsData = [
       {
-        name: "All brands",
+        name: "All Brands",
         link: "/brands",
+      },
+      {
+        name: brandData.name,
+        link: `/brands/${brand}`,
       },
     ];
     return (
       <PrivateLayout>
-        <PageHeading
-          name={brandData.name}
-          breadcrumbs={breadCrumbsData}
-          primaryText="New Location"
-          primaryLink={`/brands/${brand}/new-location`}
-          secondaryLink={`/brands/${brand}/edit`}
-          secondaryText="Edit Brand"
-        />
-        <div>
-          <h2>BrandUsers</h2>
-        </div>
+        <PageHeading name="Edit" breadcrumbs={breadCrumbsData} />
+        <CreateCoworking brandId={brand} brandData={brandData} />
       </PrivateLayout>
     );
   }

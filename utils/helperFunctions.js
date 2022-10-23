@@ -19,7 +19,7 @@ export function getInitials(inputName) {
   return inputName
     .split(" ")
     .map((n) => n[0])
-    .join(".");
+    .join("");
 }
 
 export function classNames(...classes) {

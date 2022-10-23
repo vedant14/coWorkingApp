@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { createBrand } from "../../utils/firebasePostRequests";
+import { createBrand, updateBrand } from "../../utils/firebasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
-export function CreateCoworking() {
-  const [name, setName] = useState("");
+export function CreateCoworking({ brandId, brandData }) {
+  const [name, setName] = useState(brandData ? brandData.name : "");
   const { uniqueId } = useAuth();
   function callCreateBrand(e) {
     e.preventDefault();
@@ -15,7 +15,12 @@ export function CreateCoworking() {
         "danger"
       );
     } else {
-      createBrand({ name, uniqueId });
+      if (brandData) {
+        console.log(name, brandId);
+        updateBrand({ name, brandId });
+      } else {
+        createBrand({ name, uniqueId });
+      }
     }
   }
   return (
