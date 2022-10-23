@@ -12,3 +12,4 @@ export * from "./ProfileForm";
 export * from "./CreateCoworking";
 export * from "./ShowAllBrands";
 export * from "./PageHeading";
+export * from "./NoDataPage";

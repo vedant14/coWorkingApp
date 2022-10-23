@@ -8,8 +8,8 @@
   },
   {
     "name": "Brands",
-    "inactiveIcon": "/icons/menu-inactive/home.svg",
-    "activeIcon": "/icons/menu-active/home.svg",
+    "inactiveIcon": "/icons/menu-inactive/brand.svg",
+    "activeIcon": "/icons/menu-active/brand.svg",
     "link": "/brands",
     "merchant": true
   },

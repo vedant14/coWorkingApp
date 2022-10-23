@@ -8,7 +8,7 @@ export function PageLoader() {
   useEffect(() => {
     const timeId = setTimeout(() => {
       router.push("/");
-      signOutUser();
+      //signOutUser();
     }, 5000);
     return () => {
       clearTimeout(timeId);
