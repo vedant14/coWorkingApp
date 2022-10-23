@@ -5,6 +5,7 @@ import { InputTextArea } from "../atoms/inputTextArea";
 import { saveBookingData } from "../../utils/firebasePostRequests";
 import { displayDate, displaySlotData } from "../../utils/helperFunctions";
 import { TailSpin } from "react-loader-spinner";
+import { classNames } from "../../utils/helperFunctions";
 export default function BookingForm({
   selectedDate,
   selectedTime,
@@ -112,10 +113,6 @@ export default function BookingForm({
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-  }
-
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
   }
 
   function PageLoaderSpinner() {

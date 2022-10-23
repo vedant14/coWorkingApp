@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { SelectionField } from "./selectionField";
+import { classNames } from "../../utils/helperFunctions";
 export function AvailabilityInput({
   day,
   userAvailability,
@@ -13,9 +14,6 @@ export function AvailabilityInput({
     setInputRows(inputRows + 1);
   }
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
   var rows = [...Array(inputRows).keys()];
   return (
     <div>

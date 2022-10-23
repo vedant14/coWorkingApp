@@ -1,5 +1,5 @@
 import { displayDate, displaySlotData } from "../../utils/helperFunctions";
-
+import { classNames } from "../../utils/helperFunctions";
 export default function SlotSelection({
   selectedDate,
   selectedSlots,
@@ -18,10 +18,6 @@ export default function SlotSelection({
 
   function callTimeSelected(value) {
     setSelectedTime(value);
-  }
-
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
   }
 
   function callShowBookingForm() {

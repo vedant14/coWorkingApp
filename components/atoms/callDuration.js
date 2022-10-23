@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputText } from "./inputText";
-
+import { classNames } from "../../utils/helperFunctions";
 export function CallDuration({ id, label, value, onChangeValue, custom }) {
   const callDurationArray = [
     { name: "10min", value: "10" },
@@ -11,9 +11,6 @@ export function CallDuration({ id, label, value, onChangeValue, custom }) {
   ];
 
   const [show, setShow] = useState(false);
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
 
   function buttonValue(e, value) {
     e.preventDefault();

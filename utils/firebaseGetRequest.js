@@ -6,6 +6,7 @@ import {
   where,
   collection,
 } from "firebase/firestore";
+import { toastNotification } from "../components/atoms/toastNotification";
 import { db } from "./firebaseConfig";
 
 export async function getUserProfile(setCurrentUser, uniqueId) {
@@ -31,12 +32,12 @@ export async function getAdminBrandData(uniqueId, brandData, setBrandData) {
           ...brandData,
           {
             id: doc.data().brandId,
-            brandName: brandName.name,
+            name: brandName.name,
           },
         ]);
       });
     } else {
-      console.log("NOTING");
+      toastNotification("Error", "No data found", "danger");
     }
   });
 }

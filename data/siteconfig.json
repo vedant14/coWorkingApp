@@ -7,6 +7,13 @@
     "merchant": false
   },
   {
+    "name": "Brands",
+    "inactiveIcon": "/icons/menu-inactive/home.svg",
+    "activeIcon": "/icons/menu-active/home.svg",
+    "link": "/brands",
+    "merchant": true
+  },
+  {
     "name": "Bookings",
     "inactiveIcon": "/icons/menu-inactive/phone.svg",
     "activeIcon": "/icons/menu-active/phone.svg",

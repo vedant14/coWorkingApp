@@ -1,7 +1,16 @@
+const colors = [
+  "bg-pink-600",
+  "bg-purple-600",
+  "bg-yellow-500",
+  "bg-green-500",
+];
+
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import { getAdminBrandData } from "../../utils/firebaseGetRequest";
+import { classNames, getInitials } from "../../utils/helperFunctions";
+
 export function ShowAllBrands() {
   const [brandData, setBrandData] = useState([]);
   const { uniqueId } = useAuth();
@@ -10,43 +19,33 @@ export function ShowAllBrands() {
       getAdminBrandData(uniqueId, brandData, setBrandData);
     }
   }, [uniqueId]);
+
   return (
     <div>
-      <div className="h1">All your brands</div>
       {brandData && (
         <ul
           role="list"
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {brandData.map((item, i) => (
-            <li
-              key={i}
-              className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200"
-            >
-              <div className="w-full flex items-center justify-between p-6 space-x-6">
-                <div className="flex-1 truncate">
-                  <div className="flex items-center space-x-3">
-                    <h3 className="text-gray-900 text-sm font-medium truncate">
-                      {item.brandName}
-                    </h3>
-                    <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                      LIVE
-                    </span>
+            <Link key={i} href={`/brands/${item.id}`} passHref>
+              <li className="col-span-1 flex shadow-sm rounded-md cursor-pointer">
+                <div
+                  className={classNames(
+                    colors[Math.floor(Math.random() * colors.length)],
+                    "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+                  )}
+                >
+                  {getInitials(item.name)}
+                </div>
+                <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                  <div className="flex-1 px-4 py-2 text-sm truncate text-gray-900 font-medium hover:text-gray-600">
+                    {item.name}
+                    <p className="text-gray-500"> Members</p>
                   </div>
                 </div>
-              </div>
-              <div>
-                <div className="-mt-px flex divide-x divide-gray-200">
-                  <div className="-ml-px w-0 flex-1 flex">
-                    <Link href={`/brands/${item.id}`} passHref>
-                      <div className="relative w-0 cursor-pointer flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                        <span className="ml-3">View Brand</span>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
       )}

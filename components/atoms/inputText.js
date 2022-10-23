@@ -1,3 +1,4 @@
+import { classNames } from "../../utils/helperFunctions";
 export function InputText({
   id,
   label,
@@ -8,9 +9,6 @@ export function InputText({
   onChangeValue,
   width,
 }) {
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
   return (
     <div className="w-full">
       <label className="block text-sm text-neutral-400 sm:mt-px sm:pt-2">

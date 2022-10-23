@@ -15,6 +15,17 @@ export function displaySlotData(value) {
   }
 }
 
+export function getInitials(inputName) {
+  return inputName
+    .split(" ")
+    .map((n) => n[0])
+    .join(".");
+}
+
+export function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export function displayDate(inputDate) {
   const months = {
     0: "Jan",

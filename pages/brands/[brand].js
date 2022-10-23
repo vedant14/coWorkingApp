@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { PageLoader, PrivateLayout } from "../../components";
+import { PageHeading, PageLoader, PrivateLayout } from "../../components";
 import { getBrandDetails } from "../../utils/firebaseGetRequest";
 
 export default function BrandPage() {
@@ -38,8 +38,20 @@ export default function BrandPage() {
   }
 
   function ShowMentorPage() {
+    const breadCrumbsData = [
+      {
+        name: "All brands",
+        link: "/brands",
+      },
+    ];
     return (
       <PrivateLayout>
+        <PageHeading
+          name={brandData.name}
+          breadcrumbs={breadCrumbsData}
+          primaryText="New Location"
+          primaryLink="/brands"
+        />
         <div>{brandData.name}</div>
         <div>Add Locations</div>
       </PrivateLayout>

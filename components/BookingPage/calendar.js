@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { useEffect } from "react";
+import { classNames } from "../../utils/helperFunctions";
 export default function CalendarComponent({
   slotData,
   getNextDates,
@@ -36,9 +37,6 @@ export default function CalendarComponent({
     "November",
     "December",
   ];
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
 
   if (showCalendar === false) {
     return null;

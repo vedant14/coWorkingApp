@@ -3,13 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import siteData from "../../data/siteconfig.json";
 import { useAuth } from "../../context/AuthContext";
-
+import { classNames } from "../../utils/helperFunctions";
 export function SideBar() {
   const router = useRouter();
   const { currentUser } = useAuth();
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
 
   function ItemName({ item }) {
     return (
