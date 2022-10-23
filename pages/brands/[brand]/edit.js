@@ -7,7 +7,7 @@ import {
   PageLoader,
   PrivateLayout,
 } from "../../../components";
-import { getBrandDetails } from "../../../utils/firebaseGetRequest";
+import { getBrandDetails } from "../../../utils/firebaseGetRequests";
 export default function Edit() {
   const router = useRouter();
   const [brandData, setBrandData] = useState(null);

@@ -7,7 +7,7 @@ import {
   PrivateLayout,
 } from "../../../components";
 import { useRouter } from "next/router";
-import { getBrandDetails } from "../../../utils/firebaseGetRequest";
+import { getBrandDetails } from "../../../utils/firebaseGetRequests";
 
 export default function NewLocation() {
   const router = useRouter();

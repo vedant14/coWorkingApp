@@ -8,7 +8,7 @@ import {
   PrivateLayout,
   UserList,
 } from "../../../components";
-import { getBrandDetails } from "../../../utils/firebaseGetRequest";
+import { getBrandDetails } from "../../../utils/firebaseGetRequests";
 
 export default function BrandPage() {
   const router = useRouter();

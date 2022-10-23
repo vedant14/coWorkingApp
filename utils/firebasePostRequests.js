@@ -193,6 +193,7 @@ export async function createLocationUser(uniqueId, locationId, brandId, role) {
   const newLocationUserRef = doc(collection(db, "location_users"));
   const locationUserData = {
     userId: uniqueId,
+    brandId: brandId,
     locationId: locationId,
     admin: role,
     staff: true,

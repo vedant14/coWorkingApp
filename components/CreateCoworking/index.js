@@ -3,6 +3,7 @@ import { createBrand, updateBrand } from "../../utils/firebasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
+import { postDeleteBrand } from "../../utils/firebaseDeleteRequests";
 export function CreateCoworking({ brandId, brandData }) {
   const [name, setName] = useState(brandData ? brandData.name : "");
   const { uniqueId } = useAuth();
@@ -16,12 +17,17 @@ export function CreateCoworking({ brandId, brandData }) {
       );
     } else {
       if (brandData) {
-        console.log(name, brandId);
         updateBrand({ name, brandId });
       } else {
         createBrand({ name, uniqueId });
       }
     }
+  }
+
+  function callDeleteBrand(e) {
+    e.preventDefault;
+    postDeleteBrand(brandId);
+    toastNotification("Deleted", "All locations as well", "success");
   }
   return (
     <div>
@@ -34,13 +40,21 @@ export function CreateCoworking({ brandId, brandData }) {
         onChangeValue={setName}
         width="w-full"
       />
-      <div className="mt-4 ml-1">
+      <div className="flex space-x-2 mt-4 ml-1">
         <button
           className="w-fit py-2 px-4 rounded-md bg-dark-green shadow-sm text-white text-base font-medium inline-flex items-center space-x-4"
           onClick={(e) => callCreateBrand(e)}
         >
           Create CoWorking Brand
         </button>
+        {brandId && (
+          <button
+            className="w-fit py-2 px-4 rounded-md bg-red-700 shadow-sm text-white text-base font-medium inline-flex items-center space-x-4"
+            onClick={(e) => callDeleteBrand(e)}
+          >
+            Delete Brand
+          </button>
+        )}
       </div>
     </div>
   );

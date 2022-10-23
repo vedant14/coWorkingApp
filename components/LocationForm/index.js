@@ -10,7 +10,6 @@ import { toastNotification } from "../atoms/toastNotification";
 export function LocationForm({ brandId, locationId, locationData }) {
   const [name, setName] = useState("");
   const { uniqueId } = useAuth();
-  console.log(brandId);
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "" && brandId && uniqueId) {

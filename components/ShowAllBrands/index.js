@@ -1,14 +1,8 @@
-const colors = [
-  "bg-pink-600",
-  "bg-purple-600",
-  "bg-yellow-500",
-  "bg-green-500",
-];
-
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
-import { getAdminBrandData } from "../../utils/firebaseGetRequest";
+import { getAdminBrandData } from "../../utils/firebaseGetRequests";
+import colors from "../../data/bgColors.json";
 import { classNames, getInitials } from "../../utils/helperFunctions";
 
 export function ShowAllBrands() {
@@ -33,7 +27,7 @@ export function ShowAllBrands() {
                 <div
                   className={classNames(
                     colors[Math.floor(Math.random() * colors.length)],
-                    "bg-light-green flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+                    "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
                   )}
                 >
                   {getInitials(item.name)}

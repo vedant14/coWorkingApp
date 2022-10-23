@@ -25,8 +25,8 @@ export async function getAdminBrandData(uniqueId, brandData, setBrandData) {
     where("userId", "==", uniqueId)
   );
   const querySnapshot = await getDocs(brandUserRef);
-  querySnapshot.docs.map((doc) => {
-    if (querySnapshot.docs.length !== 0) {
+  if (querySnapshot.docs.length !== 0) {
+    querySnapshot.docs.map((doc) => {
       getBrandName(doc.data().brandId, function (brandName) {
         setBrandData((brandData) => [
           ...brandData,
@@ -36,15 +36,50 @@ export async function getAdminBrandData(uniqueId, brandData, setBrandData) {
           },
         ]);
       });
-    } else {
-      toastNotification("Error", "No data found", "danger");
-    }
-  });
+    });
+  }
 }
 
 export async function getBrandName(brandId, callback) {
   const brandDataRef = doc(db, "brands", brandId);
   const querySnapshot = await getDoc(brandDataRef);
+  if (querySnapshot) {
+    return callback(querySnapshot.data());
+  }
+}
+
+export async function getUserLocationData(
+  uniqueId,
+  brandId,
+  locationData,
+  SetLocationData
+) {
+  const locationUserRef = query(
+    collection(db, "location_users"),
+    where("userId", "==", uniqueId),
+    where("brandId", "==", brandId)
+  );
+  const querySnapshot = await getDocs(locationUserRef);
+  if (querySnapshot.docs.length !== 0) {
+    querySnapshot.docs.map((doc) => {
+      getLocationName(doc.data().locationId, function (fetchedLocationData) {
+        SetLocationData((locationData) => [
+          ...locationData,
+          {
+            id: doc.data().locationId,
+            name: fetchedLocationData.name,
+          },
+        ]);
+      });
+    });
+  } else {
+    toastNotification("Error", "No data found", "danger");
+  }
+}
+
+async function getLocationName(locationId, callback) {
+  const locationDataRef = doc(db, "locations", locationId);
+  const querySnapshot = await getDoc(locationDataRef);
   if (querySnapshot) {
     return callback(querySnapshot.data());
   }
