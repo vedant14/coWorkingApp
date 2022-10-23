@@ -60,21 +60,17 @@ export async function getUserLocationData(
     where("brandId", "==", brandId)
   );
   const querySnapshot = await getDocs(locationUserRef);
-  if (querySnapshot.docs.length !== 0) {
-    querySnapshot.docs.map((doc) => {
-      getLocationName(doc.data().locationId, function (fetchedLocationData) {
-        SetLocationData((locationData) => [
-          ...locationData,
-          {
-            id: doc.data().locationId,
-            name: fetchedLocationData.name,
-          },
-        ]);
-      });
+  querySnapshot.docs.map((doc) => {
+    getLocationName(doc.data().locationId, function (fetchedLocationData) {
+      SetLocationData((locationData) => [
+        ...locationData,
+        {
+          id: doc.data().locationId,
+          name: fetchedLocationData.name,
+        },
+      ]);
     });
-  } else {
-    toastNotification("Error", "No data found", "danger");
-  }
+  });
 }
 
 async function getLocationName(locationId, callback) {
