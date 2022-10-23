@@ -45,7 +45,19 @@ export default function BrandPage() {
           secondaryLink={`/brands/${brand}/edit`}
           secondaryText="Edit Brand"
         />
-        <LocationList brandId={brand} />
+        <div className="bg-white py-5">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">
+            Brand Locations
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">
+            All the users of this brand - these do not include location users
+          </p>
+        </div>
+        <div className="bg-white shadow overflow-hidden mb-4 sm:rounded-md">
+          <ul role="list" className="divide-y divide-gray-200">
+            <LocationList brandId={brand} />
+          </ul>
+        </div>
         <UserList />
       </PrivateLayout>
     );

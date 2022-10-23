@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getAdminBrandData } from "../../utils/firebaseGetRequests";
+import { LocationList } from "../LocationList";
 import { BrandCard } from "./brandCard";
-import { LocationCard } from "./locationCard";
 
 export function ShowAllBrands() {
   const [brandData, setBrandData] = useState([]);
@@ -21,7 +21,7 @@ export function ShowAllBrands() {
               <div className="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul role="list" className="divide-y divide-gray-200">
                   <BrandCard item={item} />
-                  <LocationCard brandId={item.id} uniqueId={uniqueId} />
+                  <LocationList brandId={item.id} />
                 </ul>
               </div>
             </div>

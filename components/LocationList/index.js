@@ -1,9 +1,12 @@
+import {
+  CalendarIcon,
+  LocationMarkerIcon,
+  UsersIcon,
+} from "@heroicons/react/solid";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getInitials, classNames } from "../../utils/helperFunctions";
-import { useAuth } from "../../context/AuthContext";
-import colors from "../../data/bgColors.json";
 import { getUserLocationData } from "../../utils/firebaseGetRequests";
+import { useAuth } from "../../context/AuthContext";
 export function LocationList({ brandId }) {
   const [locationData, SetLocationData] = useState([]);
   const { uniqueId } = useAuth();
@@ -12,43 +15,77 @@ export function LocationList({ brandId }) {
       getUserLocationData(uniqueId, brandId, locationData, SetLocationData);
     }
   }, [uniqueId]);
+  if (!locationData) {
+    return null;
+  } else if (locationData.length === 0) {
+    return <NoLocationCard />;
+  } else return <LocationDetailCard />;
 
-  return (
-    <div className="mb-5">
-      <div className="bg-white pb-5">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">
-          All Locations
-        </h3>
-        <p className="mt-1 text-sm text-gray-500">
-          All the users of this brand - these do not include location users
-        </p>
-      </div>
-      {locationData && (
-        <ul
-          role="list"
-          className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {locationData.map((item, i) => (
-            <Link key={i} href={`/brands/${brandId}/${item.id}`} passHref>
-              <li className="col-span-1 flex shadow-sm rounded-md cursor-pointer">
-                <div
-                  className={classNames(
-                    "flex-shrink-0 flex bg-dark-green text-light-green items-center justify-center w-16 text-sm font-medium rounded-l-md"
-                  )}
-                >
-                  {getInitials(item.name)}
-                </div>
-                <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                  <div className="flex-1 px-4 py-2 text-sm truncate text-gray-900 font-medium hover:text-gray-600">
-                    {item.name}
-                    <p className="text-gray-500"> Members</p>
+  function LocationDetailCard() {
+    return (
+      <>
+        {locationData.map((item, i) => (
+          <li key={i}>
+            <Link href={`/brands/${brandId}/${item.id}`} passHref>
+              <a className="block hover:bg-gray-50">
+                <div className="px-4 py-4 sm:px-6">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-indigo-600 truncate">
+                      {item.name}
+                    </p>
+                    <div className="ml-2 flex-shrink-0 flex">
+                      <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        position.type
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-2 sm:flex sm:justify-between">
+                    <div className="sm:flex">
+                      <p className="flex items-center text-sm text-gray-500">
+                        <UsersIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        position.department
+                      </p>
+                      <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                        <LocationMarkerIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        position.location
+                      </p>
+                    </div>
+                    <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                      <CalendarIcon
+                        className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      <p>Closing on </p>
+                    </div>
                   </div>
                 </div>
-              </li>
+              </a>
             </Link>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+          </li>
+        ))}
+      </>
+    );
+  }
+  function NoLocationCard() {
+    return (
+      <li>
+        <div className="px-4 py-4 sm:px-6">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-neutral-600 truncate">
+              No locations yet for this brand{" "}
+              <Link href={`/brands/${brandId}/new-location`}>
+                <a className="text-dark-green text-bold underline">Add one</a>
+              </Link>
+            </p>
+          </div>
+        </div>
+      </li>
+    );
+  }
 }

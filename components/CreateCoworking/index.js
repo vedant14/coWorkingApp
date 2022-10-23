@@ -45,14 +45,14 @@ export function CreateCoworking({ brandId, brandData }) {
           className="w-fit py-2 px-4 rounded-md bg-dark-green shadow-sm text-white text-base font-medium inline-flex items-center space-x-4"
           onClick={(e) => callCreateBrand(e)}
         >
-          Create CoWorking Brand
+          Save
         </button>
         {brandId && (
           <button
             className="w-fit py-2 px-4 rounded-md bg-red-700 shadow-sm text-white text-base font-medium inline-flex items-center space-x-4"
             onClick={(e) => callDeleteBrand(e)}
           >
-            Delete Brand
+            Delete
           </button>
         )}
       </div>
