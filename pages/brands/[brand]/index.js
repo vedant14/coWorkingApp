@@ -5,6 +5,7 @@ import {
   PageHeading,
   PageLoader,
   PrivateLayout,
+  UserList,
 } from "../../../components";
 import { getBrandDetails } from "../../../utils/firebaseGetRequest";
 
@@ -43,9 +44,7 @@ export default function BrandPage() {
           secondaryLink={`/brands/${brand}/edit`}
           secondaryText="Edit Brand"
         />
-        <div>
-          <h2>BrandUsers</h2>
-        </div>
+        <UserList />
       </PrivateLayout>
     );
   }
