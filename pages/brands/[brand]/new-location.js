@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  LocationForm,
   NoDataPage,
   PageHeading,
   PageLoader,
@@ -37,9 +38,7 @@ export default function NewLocation() {
     return (
       <PrivateLayout>
         <PageHeading name="New Location" breadcrumbs={breadCrumbsData} />
-        <div>
-          <div>{brandData.name}</div>
-        </div>
+        <LocationForm brandId={brand} />
       </PrivateLayout>
     );
   }

@@ -127,7 +127,6 @@ export async function updateUserProfile({
       });
   }
 }
-
 export async function createBrand({ name, uniqueId }) {
   const newBrandRef = doc(collection(db, "brands"));
   const brandData = {
@@ -157,6 +156,21 @@ export async function updateBrand({ name, brandId }) {
     });
 }
 
+export async function createLocation({ name, brandId, uniqueId }) {
+  const newLocationRef = doc(collection(db, "locations"));
+  const locationData = {
+    name: name,
+    brandId: brandId,
+    createdAt: Timestamp.now(),
+  };
+  await setDoc(newLocationRef, locationData)
+    .then(() => {
+      createLocationUser(uniqueId, newLocationRef.id, brandId, true);
+    })
+    .catch((error) => {
+      toastNotification("Oops something is wrong", error.message, "danger");
+    });
+}
 export async function createBrandUser(uniqueId, brandId, role) {
   const newBrandUserRef = doc(collection(db, "brand_users"));
   const brandUserData = {
@@ -174,6 +188,26 @@ export async function createBrandUser(uniqueId, brandId, role) {
       toastNotification("Oops something is wrong", error.message, "danger");
     });
 }
+
+export async function createLocationUser(uniqueId, locationId, brandId, role) {
+  const newLocationUserRef = doc(collection(db, "location_users"));
+  const locationUserData = {
+    userId: uniqueId,
+    locationId: locationId,
+    admin: role,
+    staff: true,
+    createdAt: Timestamp.now(),
+  };
+  await setDoc(newLocationUserRef, locationUserData)
+    .then(() => {
+      toastNotification("Location Created", "You are all set now", "success");
+      Router.push(`/brands/${brandId}`);
+    })
+    .catch((error) => {
+      toastNotification("Oops something is wrong", error.message, "danger");
+    });
+}
+
 // slug: slugify(
 //   firstName + lastName + "-" + Math.random().toString(36).slice(6)
 // ),

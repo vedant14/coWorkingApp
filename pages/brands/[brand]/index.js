@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
+  LocationList,
   NoDataPage,
   PageHeading,
   PageLoader,
@@ -44,6 +45,7 @@ export default function BrandPage() {
           secondaryLink={`/brands/${brand}/edit`}
           secondaryText="Edit Brand"
         />
+        <LocationList brandId={brand} />
         <UserList />
       </PrivateLayout>
     );
