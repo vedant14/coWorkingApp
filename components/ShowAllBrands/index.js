@@ -33,7 +33,7 @@ export function ShowAllBrands() {
                 <div
                   className={classNames(
                     colors[Math.floor(Math.random() * colors.length)],
-                    "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+                    "bg-light-green flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
                   )}
                 >
                   {getInitials(item.name)}

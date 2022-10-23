@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { PageHeading, PageLoader, PrivateLayout } from "../../components";
-import { getBrandDetails } from "../../utils/firebaseGetRequest";
+import { PageHeading, PageLoader, PrivateLayout } from "../../../components";
+import { getBrandDetails } from "../../../utils/firebaseGetRequest";
 
 export default function BrandPage() {
   const router = useRouter();
@@ -50,7 +50,8 @@ export default function BrandPage() {
           name={brandData.name}
           breadcrumbs={breadCrumbsData}
           primaryText="New Location"
-          primaryLink="/brands"
+          primaryLink={`/brands/${brand}/new-location`}
+          primaryButtonQuery={brandData}
         />
         <div>{brandData.name}</div>
         <div>Add Locations</div>
