@@ -33,8 +33,7 @@ export function LocationList({ brandId }) {
               <li className="col-span-1 flex shadow-sm rounded-md cursor-pointer">
                 <div
                   className={classNames(
-                    colors[Math.floor(Math.random() * colors.length)],
-                    "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+                    "flex-shrink-0 flex bg-dark-green text-light-green items-center justify-center w-16 text-sm font-medium rounded-l-md"
                   )}
                 >
                   {getInitials(item.name)}
