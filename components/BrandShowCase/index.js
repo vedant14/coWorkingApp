@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/solid";
 import { RadioGroup } from "@headlessui/react";
 import { ShieldCheckIcon } from "@heroicons/react/outline";
+import { CustomBreadcrumb } from "../atoms/customBreadCrumb";
 
 const product = {
   name: "Everyday Ruck Snack",
@@ -48,42 +49,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function BrandShowCase() {
+export function BrandShowCase({ bookingData }) {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 
   return (
     <div className="bg-white">
-      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
+      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-10 sm:px-6 lg:max-w-5xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
-          <nav aria-label="Breadcrumb">
-            <ol role="list" className="flex items-center space-x-2">
-              {product.breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
-                <li key={breadcrumb.id}>
-                  <div className="flex items-center text-sm">
-                    <a
-                      href={breadcrumb.href}
-                      className="font-medium text-gray-500 hover:text-gray-900"
-                    >
-                      {breadcrumb.name}
-                    </a>
-                    {breadcrumbIdx !== product.breadcrumbs.length - 1 ? (
-                      <svg
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        aria-hidden="true"
-                        className="ml-2 flex-shrink-0 h-5 w-5 text-gray-300"
-                      >
-                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                      </svg>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </nav>
-
           <div className="mt-4">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               {product.name}

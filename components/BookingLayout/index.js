@@ -1,5 +1,3 @@
-import { MaxContainer } from "../atoms/maxContainer";
-
 export function BookingLayout({ children }) {
   return (
     <div className="bg-white-700 relative min-h-screen mb-56">
@@ -7,11 +5,11 @@ export function BookingLayout({ children }) {
         &nbsp;
       </div>
       <div className="absolute z-20 w-full top-28">
-        <MaxContainer>
+        <div className="container mx-auto sm:px-6 lg:px-8">
           <div className="bg-white w-full p-10 rounded-md shadow-sm">
             {children}
           </div>
-        </MaxContainer>
+        </div>
       </div>
     </div>
   );
