@@ -1,28 +1,30 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
-  LocationList,
+  CreateSlug,
   NoDataPage,
   PageHeading,
   PageLoader,
   PrivateLayout,
   UserList,
 } from "../../../../components";
-import { getBrandDetails } from "../../../../utils/firebaseGetRequests";
+import { getLocationName } from "../../../../utils/firebaseGetRequests";
 
 export default function BrandPage() {
   const router = useRouter();
-  const [brandData, setBrandData] = useState(null);
-  const { brand, location } = router.query;
+  const [locationData, setLocationData] = useState("");
+  const { location } = router.query;
   useEffect(() => {
-    if (brand) {
-      getBrandDetails(brand, setBrandData);
+    if (location) {
+      getLocationName(location, function (locationFetchedData) {
+        setLocationData(locationFetchedData);
+      });
     }
-  }, [brand]);
+  }, [location]);
 
-  if (brandData === false) {
+  if (locationData === false) {
     return <NoDataPage />;
-  } else if (!brandData) {
+  } else if (!locationData) {
     return <PageLoader />;
   } else {
     return <ShowBrandPage />;
@@ -35,20 +37,21 @@ export default function BrandPage() {
         link: "/brands",
       },
       {
-        name: `${brandData.name}`,
-        link: `/brands/${brand}`,
+        name: `${locationData.brandName}`,
+        link: `/brands/${locationData.brandId}`,
       },
     ];
     return (
       <PrivateLayout>
         <PageHeading
-          name={brandData.name}
+          name={locationData.name}
           breadcrumbs={breadCrumbsData}
           primaryText="Add Schedule"
-          primaryLink={`/brands/${brand}/new-location`}
-          secondaryLink={`/brands/${brand}/edit`}
+          primaryLink={`/brands/${location}/new-location`}
+          secondaryLink={`/brands/${location}/edit`}
           secondaryText="Star Location"
         />
+        <CreateSlug locationData={locationData} />
         <UserList />
       </PrivateLayout>
     );

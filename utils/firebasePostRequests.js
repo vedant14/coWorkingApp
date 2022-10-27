@@ -37,6 +37,7 @@ export async function createUserProfile(
       setError(error.message);
     });
 }
+
 export async function updateUserProfile({
   userId,
   firstName,
@@ -127,6 +128,25 @@ export async function updateUserProfile({
       });
   }
 }
+
+export async function updateLocationSlug(uniqueId, locationId, slug, callback) {
+  const newSlug = slugify(slug);
+  // const verifySlug = await verifySlugFuntion(locationId, newSlug);
+  if (newSlug) {
+    const userLocationRef = doc(db, "locations", locationId);
+    await updateDoc(userLocationRef, {
+      slug: slug,
+    }).then(() => {
+      return callback({
+        success: true,
+        message: "ERROR",
+      });
+    });
+  } else {
+    return callback({ success: false, message: "ERROR" });
+  }
+}
+
 export async function createBrand({ name, uniqueId }) {
   const newBrandRef = doc(collection(db, "brands"));
   const brandData = {
@@ -141,6 +161,7 @@ export async function createBrand({ name, uniqueId }) {
       toastNotification("Oops something is wrong", error.message, "danger");
     });
 }
+
 export async function updateBrand({ name, brandId }) {
   const updateBrandRef = doc(db, "brands", brandId);
   const brandData = {
@@ -171,6 +192,7 @@ export async function createLocation({ name, brandId, uniqueId }) {
       toastNotification("Oops something is wrong", error.message, "danger");
     });
 }
+
 export async function createBrandUser(uniqueId, brandId, role) {
   const newBrandUserRef = doc(collection(db, "brand_users"));
   const brandUserData = {
@@ -209,20 +231,19 @@ export async function createLocationUser(uniqueId, locationId, brandId, role) {
     });
 }
 
-// slug: slugify(
-//   firstName + lastName + "-" + Math.random().toString(36).slice(6)
-// ),
-async function verifySlugFuntion(userId, slug) {
+async function verifySlugFuntion(locationId, slug) {
   if (slug) {
     const slugRef = query(
-      collection(db, "user_profile"),
+      collection(db, "locations"),
       where("slug", "==", slug)
     );
     const querySnapshot = await getDocs(slugRef);
     if (querySnapshot.docs.length === 0) {
+      console.log("Vedant", querySnapshot.docs);
       return true;
     } else {
-      if (querySnapshot.docs[0].id === userId) {
+      if (querySnapshot.docs[0].id === locationId) {
+        querySnapshot.docs.map((doc) => console.log(doc.id()));
         return true;
       } else {
         return false;

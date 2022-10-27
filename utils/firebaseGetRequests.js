@@ -73,11 +73,20 @@ export async function getUserLocationData(
   });
 }
 
-async function getLocationName(locationId, callback) {
+export async function getLocationName(locationId, callback) {
   const locationDataRef = doc(db, "locations", locationId);
   const querySnapshot = await getDoc(locationDataRef);
   if (querySnapshot) {
-    return callback(querySnapshot.data());
+    getBrandName(querySnapshot.data().brandId, function (brandData) {
+      var array = {
+        id: locationId,
+        name: querySnapshot.data().name,
+        slug: querySnapshot.data().slug,
+        brandName: brandData.name,
+        brandId: querySnapshot.data().brandId,
+      };
+      return callback(array);
+    });
   }
 }
 

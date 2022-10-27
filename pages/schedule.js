@@ -5,7 +5,7 @@ import {
   UserAvailabilityComponent,
 } from "../components";
 import { useAuth } from "../context/AuthContext";
-import { getEditScheduleData } from "../utils/firebaseGetRequest";
+import { getEditScheduleData } from "../utils/firebaseGetRequests";
 export default function SchedulePage() {
   const [editData, setEditData] = useState(null);
   const { uniqueId } = useAuth();

@@ -16,3 +16,4 @@ export * from "./NoDataPage";
 export * from "./UserList";
 export * from "./LocationList";
 export * from "./LocationForm";
+export * from "./CreateSlug";

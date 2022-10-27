@@ -29,13 +29,13 @@ export function Header() {
             {currentUser.firstName} {currentUser.lastName}
           </p>
         </div>
-        {currentUser.merchant === true && (
+        {/* {currentUser.merchant === true && (
           <Link href={`/book/${currentUser.slug}`} passHref>
             <a target="_blank" className="bg-dark-green p-1 rounded">
               <img src="/icons/display/link.svg" alt="link" />
             </a>
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );
