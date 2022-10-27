@@ -1,33 +1,27 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import {
-  BookingLayout,
-  MentorIntro,
-  ServiceList,
-  BookingPage,
-  PageLoader,
-} from "../../components";
-import { getMentorPublicDetails } from "../../utils/firebasePublicDataRequests";
+import { BookingLayout, BrandShowCase, PageLoader } from "../../components";
+import { getPublicBookingData } from "../../utils/firebasePublicDataRequests";
 export default function MentorPage() {
   const router = useRouter();
-  const [mentorData, setMentorData] = useState(null);
+  const [bookingData, setBookingData] = useState(null);
   const [currentStep, setCurrentStep] = useState(0);
-  const { mentor } = router.query;
+  const { booking } = router.query;
   useEffect(() => {
-    if (mentor) {
-      getMentorPublicDetails(mentor, setMentorData);
+    if (booking) {
+      getPublicBookingData(booking, setBookingData);
     }
-  }, [mentor]);
+  }, [booking]);
 
-  if (mentorData === false) {
-    return <NoMentorPage />;
-  } else if (!mentorData) {
+  if (bookingData === false) {
+    return <NoBookingsPage />;
+  } else if (!bookingData) {
     return <PageLoader />;
   } else {
-    return <ShowMentorPage />;
+    return <DoBookingPage />;
   }
 
-  function NoMentorPage() {
+  function NoBookingsPage() {
     return (
       <BookingLayout>
         <div className="grid grid-cols-5 gap-6">
@@ -43,17 +37,11 @@ export default function MentorPage() {
     );
   }
 
-  function ShowMentorPage() {
+  function DoBookingPage() {
     return (
       <BookingLayout>
-        <MentorIntro mentorData={mentorData} />
-        {currentStep === 0 && (
-          <ServiceList
-            mentorData={mentorData}
-            setCurrentStep={setCurrentStep}
-          />
-        )}
-        {currentStep === 1 && <BookingPage mentorData={mentorData} />}
+        <BrandShowCase bookingData={bookingData} />
+        {/* <MentorIntro bookingData={bookingData} /> */}
       </BookingLayout>
     );
   }

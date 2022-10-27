@@ -9,9 +9,9 @@ import {
 import { db } from "./firebaseConfig";
 import defaultSlotData from "../data/timeSlots.json";
 
-export async function getMentorPublicDetails(slug, setMentorData) {
+export async function getPublicBookingData(slug, setMentorData) {
   const usersRef = query(
-    collection(db, "user_profile"),
+    collection(db, "locations"),
     where("slug", "==", slug)
   );
   const querySnapshot = await getDocs(usersRef);

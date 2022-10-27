@@ -5,7 +5,7 @@ export * from "./UserAvailabilityComponent";
 export * from "./BookingPage";
 export * from "./SplitLayout";
 export * from "./BookingLayout";
-export * from "./MentorIntro";
+
 export * from "./ServiceList";
 export * from "./UpcomingBookings";
 export * from "./ProfileForm";
@@ -17,3 +17,4 @@ export * from "./UserList";
 export * from "./LocationList";
 export * from "./LocationForm";
 export * from "./CreateSlug";
+export * from "./BrandShowCase";

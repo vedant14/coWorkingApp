@@ -123,8 +123,8 @@ export function ProfileForm() {
   }
 
   return (
-    <form className="mt-4 mb-10 grid grid-cols-1 lg:grid-cols-3 gap-x-6 w-full">
-      <div className="space-y-6 lg:col-span-2">
+    <form className="mt-4 mb-10 w-2/3 gap-x-6">
+      <div className="space-y-6">
         <div className="w-full flex space-x-4 items-start">
           <div className="shrink-0">
             <label className="block text-sm text-neutral-400 sm:mt-px sm:pt-2">
@@ -268,29 +268,6 @@ export function ProfileForm() {
           onChangeValue={setLinkedInUrl}
           width="full"
         />
-      </div>
-      <div className="lg:mt-0 mt-6 pr-4">
-        <div className="bg-neutral-50 border border-neutral-100 p-4 rounded">
-          <div className="flex items-center space-x-2">
-            <div className="shrink-0 cursor-pointer" onClick={copyText}>
-              <img src="/icons/display/link-blue.svg" alt="link" />
-            </div>
-            <div className="font-bold text-neutral-700">
-              Edit your Custom URL
-            </div>
-          </div>
-          <div className="text-sm text-neutral-500 mt-2">
-            Personalize the URL for your profile.
-          </div>
-          <InputText
-            id="slug"
-            addText={`${process.env.NEXT_PUBLIC_URL}/book/`}
-            type="text"
-            placeholder="slug"
-            value={slug}
-            onChangeValue={setSlug}
-          />
-        </div>
       </div>
       <div className="mt-6">
         <button

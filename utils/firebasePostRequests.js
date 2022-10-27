@@ -131,6 +131,7 @@ export async function updateUserProfile({
 
 export async function updateLocationSlug(uniqueId, locationId, slug, callback) {
   const newSlug = slugify(slug);
+  // TODO verifySlug that it is unique
   // const verifySlug = await verifySlugFuntion(locationId, newSlug);
   if (newSlug) {
     const userLocationRef = doc(db, "locations", locationId);
