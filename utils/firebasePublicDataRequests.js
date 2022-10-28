@@ -9,21 +9,21 @@ import {
 import { db } from "./firebaseConfig";
 import defaultSlotData from "../data/timeSlots.json";
 
-export async function getPublicBookingData(slug, setMentorData) {
+export async function getPublicBookingData(slug, callback) {
   const usersRef = query(
     collection(db, "locations"),
     where("slug", "==", slug)
   );
   const querySnapshot = await getDocs(usersRef);
   if (querySnapshot.docs.length !== 0) {
-    setMentorData(
-      querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }))
-    );
+    var array = [];
+    array = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    return callback(array[0]);
   } else {
-    setMentorData(false);
+    return callback(false);
   }
 }
 

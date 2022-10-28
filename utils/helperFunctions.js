@@ -26,6 +26,10 @@ export function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+export function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function displayDate(inputDate) {
   const months = {
     0: "Jan",

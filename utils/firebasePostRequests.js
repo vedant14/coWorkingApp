@@ -183,6 +183,9 @@ export async function createLocation({ name, brandId, uniqueId }) {
   const locationData = {
     name: name,
     brandId: brandId,
+    geoPin: "Ravi Nagar Sq.",
+    description:
+      "Whether it’s working for yourself, or remotely, it’s great to be independent. Our purpose is to create an environment that allows you to focus on what’s really important, getting your work done and meet interesting people. All these in one place!",
     createdAt: Timestamp.now(),
   };
   await setDoc(newLocationRef, locationData)

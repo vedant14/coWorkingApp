@@ -9,7 +9,9 @@ export default function MentorPage() {
   const { booking } = router.query;
   useEffect(() => {
     if (booking) {
-      getPublicBookingData(booking, setBookingData);
+      getPublicBookingData(booking, function (fetchedData) {
+        setBookingData(fetchedData);
+      });
     }
   }, [booking]);
 

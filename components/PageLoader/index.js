@@ -9,7 +9,7 @@ export function PageLoader() {
     const timeId = setTimeout(() => {
       router.push("/");
       //signOutUser();
-    }, 5000);
+    }, 10000);
     return () => {
       clearTimeout(timeId);
     };

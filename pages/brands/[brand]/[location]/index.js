@@ -48,7 +48,7 @@ export default function BrandPage() {
           breadcrumbs={breadCrumbsData}
           primaryText="Add Schedule"
           primaryLink={`/brands/${location}/new-location`}
-          secondaryLink={`/brands/${location}/edit`}
+          secondaryLink={`/brands/${locationData.brandId}/${location}/edit`}
           secondaryText="Star Location"
         />
         <CreateSlug locationData={locationData} />
