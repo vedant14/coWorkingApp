@@ -1,16 +1,6 @@
 import { LocationMarkerIcon, UsersIcon } from "@heroicons/react/solid";
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getUserLocationData } from "../../utils/firebaseGetRequests";
-import { useAuth } from "../../context/AuthContext";
-export function LocationList({ brandId }) {
-  const [locationData, SetLocationData] = useState([]);
-  const { uniqueId } = useAuth();
-  useEffect(() => {
-    if (uniqueId && brandId) {
-      getUserLocationData(uniqueId, brandId, locationData, SetLocationData);
-    }
-  }, [uniqueId]);
+export function LocationList({ brandId, locationData }) {
   if (!locationData) {
     return null;
   } else if (locationData.length === 0) {

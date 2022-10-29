@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 export function Header() {
   const { currentUser } = useAuth();
   return (
-    <div className="bg-neutral-50 fixed w-full top-0 z-10 flex-shrink-0 flex h-16">
+    <div className="bg-white fixed w-full top-0 z-10 flex-shrink-0 flex h-16">
       <div className="my-auto mr-auto">
         <img
           src="/logo.svg"

@@ -16,7 +16,7 @@ export * from "./ShowAllBrands";
 export * from "./PageHeading";
 export * from "./NoDataPage";
 export * from "./UserList";
-export * from "./LocationList";
 export * from "./LocationForm";
 export * from "./CreateSlug";
 export * from "./BrandShowCase";
+export * from "./BrandInfoPage";

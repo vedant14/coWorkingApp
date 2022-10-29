@@ -243,7 +243,6 @@ async function verifySlugFuntion(locationId, slug) {
     );
     const querySnapshot = await getDocs(slugRef);
     if (querySnapshot.docs.length === 0) {
-      console.log("Vedant", querySnapshot.docs);
       return true;
     } else {
       if (querySnapshot.docs[0].id === locationId) {

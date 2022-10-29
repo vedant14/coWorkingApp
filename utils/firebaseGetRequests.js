@@ -6,7 +6,6 @@ import {
   where,
   collection,
 } from "firebase/firestore";
-import { toastNotification } from "../components/atoms/toastNotification";
 import { db } from "./firebaseConfig";
 
 export async function getUserProfile(setCurrentUser, uniqueId) {
@@ -48,29 +47,24 @@ export async function getBrandName(brandId, callback) {
   }
 }
 
-export async function getUserLocationData(
-  uniqueId,
-  brandId,
-  locationData,
-  SetLocationData
-) {
+export async function getUserLocationData(uniqueId, brandId, callback) {
   const locationUserRef = query(
     collection(db, "location_users"),
     where("userId", "==", uniqueId),
     where("brandId", "==", brandId)
   );
   const querySnapshot = await getDocs(locationUserRef);
+  var array = [];
   querySnapshot.docs.map((doc) => {
+    console.log(doc.data());
     getLocationName(doc.data().locationId, function (fetchedLocationData) {
-      SetLocationData((locationData) => [
-        ...locationData,
-        {
-          id: doc.data().locationId,
-          name: fetchedLocationData.name,
-        },
-      ]);
+      array.push({
+        id: doc.data().locationId,
+        name: fetchedLocationData.name,
+      });
     });
   });
+  return callback(array);
 }
 
 export async function getLocationName(locationId, callback) {
@@ -90,11 +84,20 @@ export async function getLocationName(locationId, callback) {
   }
 }
 
-export async function getBrandDetails(brandId, setBrandData) {
+export async function getBrandDetails(uniqueId, brandId, callback) {
   const brandDataRef = doc(db, "brands", brandId);
+  // TODO CHECK IF THE USER IS THE OWNER OF THE BRAND
   const querySnapshot = await getDoc(brandDataRef);
   if (querySnapshot) {
-    setBrandData(querySnapshot.data());
+    getUserLocationData(uniqueId, brandId, function (fetchedLocationData) {
+      console.log("fetchedLocationData", fetchedLocationData);
+      var array = {
+        id: brandId,
+        name: querySnapshot.data().name,
+        locations: fetchedLocationData,
+      };
+      return callback(array);
+    });
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getAdminBrandData } from "../../utils/firebaseGetRequests";
-import { LocationList } from "../LocationList";
+import { LocationList } from "../BrandInfoPage/locationList";
 import { BrandCard } from "./brandCard";
 
 export function ShowAllBrands() {
