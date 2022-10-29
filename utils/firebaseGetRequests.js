@@ -56,7 +56,6 @@ export async function getUserLocationData(uniqueId, brandId, callback) {
   const querySnapshot = await getDocs(locationUserRef);
   var array = [];
   querySnapshot.docs.map((doc) => {
-    console.log(doc.data());
     getLocationName(doc.data().locationId, function (fetchedLocationData) {
       array.push({
         id: doc.data().locationId,
@@ -90,7 +89,6 @@ export async function getBrandDetails(uniqueId, brandId, callback) {
   const querySnapshot = await getDoc(brandDataRef);
   if (querySnapshot) {
     getUserLocationData(uniqueId, brandId, function (fetchedLocationData) {
-      console.log("fetchedLocationData", fetchedLocationData);
       var array = {
         id: brandId,
         name: querySnapshot.data().name,
