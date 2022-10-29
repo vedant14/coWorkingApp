@@ -20,7 +20,9 @@ export function CreateCoworking({ brandId, brandData }) {
       if (brandData) {
         updateBrand({ name, brandId });
       } else {
-        createBrand({ name, uniqueId });
+        createBrand(name, uniqueId, function (response) {
+          console.log(response);
+        });
       }
     }
   }
