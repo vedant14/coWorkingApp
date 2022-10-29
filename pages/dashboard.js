@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  CreateCoworking,
-  PageHeading,
-  PrivateLayout,
-  UpcomingBookings,
-} from "../components";
-import { ShowAllBrands } from "../components/ShowAllBrands";
+import { PageHeading, PrivateLayout } from "../components";
 export default function Dashboard() {
   return (
     <PrivateLayout>

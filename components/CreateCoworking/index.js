@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { createBrand, updateBrand } from "../../utils/firebasePostRequests";
+import { updateBrand } from "../../utils/firebasePostRequests";
+import { createBrand } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
