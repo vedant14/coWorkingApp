@@ -7,7 +7,7 @@ import { toastNotification } from "../atoms/toastNotification";
 import { postDeleteBrand } from "../../utils/firebaseDeleteRequests";
 export function CreateCoworking({ brandId, brandData }) {
   const [name, setName] = useState(brandData ? brandData.name : "");
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "") {
@@ -20,7 +20,7 @@ export function CreateCoworking({ brandId, brandData }) {
       if (brandData) {
         updateBrand({ name, brandId });
       } else {
-        createBrand(name, uniqueId, function (response) {
+        createBrand(name, currentUser.id, function (response) {
           // toastNotification(response, "HEY", )
         });
       }

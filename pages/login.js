@@ -10,7 +10,7 @@ export default function Login() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
   async function userLogin(e) {
     e.preventDefault();
@@ -20,7 +20,7 @@ export default function Login() {
       userLoginEmail(userEmail, password, function (response) {});
     }
   }
-  if (uniqueId) {
+  if (currentUser) {
     router.push("/dashboard");
   }
   return (

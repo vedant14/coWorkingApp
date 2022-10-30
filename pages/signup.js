@@ -12,7 +12,7 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
   async function callUserSignup(e) {
     e.preventDefault();
@@ -33,7 +33,7 @@ export default function SignUp() {
       );
     }
   }
-  if (uniqueId) {
+  if (currentUser) {
     router.push("/dashboard");
   }
   return (

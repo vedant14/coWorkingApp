@@ -5,17 +5,14 @@ import { BrandCard } from "./brandCard";
 
 export function ShowAllBrands() {
   const [brandData, setBrandData] = useState([]);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   useEffect(() => {
-    if (uniqueId) {
-      getAdminBrandData(
-        "9030169c-e80c-4e73-9655-9cb14565ac65",
-        function (fetchedBrandData) {
-          setBrandData(fetchedBrandData);
-        }
-      );
+    if (currentUser) {
+      getAdminBrandData(currentUser.id, function (fetchedBrandData) {
+        setBrandData(fetchedBrandData);
+      });
     }
-  }, [uniqueId]);
+  }, [currentUser]);
   return (
     <div>
       {brandData && (

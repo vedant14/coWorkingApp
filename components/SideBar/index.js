@@ -45,11 +45,7 @@ export function SideBar() {
         <ul className="py-4 pl-6 pr-2 space-y-4">
           {siteData.map((item, i) => (
             <div key={i}>
-              {item.merchant === true ? (
-                currentUser.merchant === true && <ItemName item={item} />
-              ) : (
-                <ItemName item={item} />
-              )}
+              <ItemName item={item} />
             </div>
           ))}
         </ul>

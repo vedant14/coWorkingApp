@@ -8,13 +8,9 @@ export async function createBrand(name, uniqueId, callback) {
   if (error) {
     return callback(error);
   } else {
-    createBrandUser(
-      data[0].id,
-      "9030169c-e80c-4e73-9655-9cb14565ac65",
-      function (response) {
-        return callback(response);
-      }
-    );
+    createBrandUser(data[0].id, uniqueId, function (response) {
+      return callback(response);
+    });
   }
 }
 
@@ -30,17 +26,15 @@ async function createBrandUser(brandId, uniqueId, callback) {
 }
 
 export async function createLocation(name, uniqueId, brand_id, callback) {
-  const { data, error } = await supabase
-    .from("locations")
-    .insert([
-      {
-        name: name,
-        brand_id: brand_id,
-        city: "Nagpur",
-        country: "IND",
-        state: "MH",
-      },
-    ]);
+  const { data, error } = await supabase.from("locations").insert([
+    {
+      name: name,
+      brand_id: brand_id,
+      city: "Nagpur",
+      country: "IND",
+      state: "MH",
+    },
+  ]);
   if (error) {
     return callback(error);
   } else {

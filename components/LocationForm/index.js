@@ -6,10 +6,10 @@ import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
 export function LocationForm({ brandId, locationId, locationData }) {
   const [name, setName] = useState("");
-  const uniqueId = "9030169c-e80c-4e73-9655-9cb14565ac65";
+  const { currentUser } = useAuth();
   function callCreateBrand(e) {
     e.preventDefault();
-    if (name === "" && brandId && uniqueId) {
+    if (name === "" && brandId && currentUser.id) {
       toastNotification(
         "Oops looks like you missed something",
         "Add a name to your brand",
@@ -19,7 +19,7 @@ export function LocationForm({ brandId, locationId, locationData }) {
       if (locationData) {
         updateBrand({ name, brandId });
       } else {
-        createLocation(name, uniqueId, brandId, function (response) {
+        createLocation(name, currentUser.id, brandId, function (response) {
           // toastNotification(response)
         });
       }

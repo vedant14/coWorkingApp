@@ -9,7 +9,7 @@ import { InputTextArea } from "../atoms/inputTextArea";
 import { MultiSelectOptions } from "../atoms/multiSelect";
 import { toastNotification } from "../atoms/toastNotification";
 export function ProfileForm() {
-  const { uniqueId, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const [firstName, setFirstName] = useState(currentUser.firstName);
   const [lastName, setLastName] = useState(currentUser.lastName);
   const [slug, setSlug] = useState(currentUser.slug);
@@ -57,7 +57,7 @@ export function ProfileForm() {
       toastNotification("Last name cannot be empty!", " ", "danger");
     } else {
       updateUserProfile({
-        userId: uniqueId,
+        userId: currentUser.id,
         firstName: firstName,
         lastName: lastName,
         slug: slug,
@@ -84,7 +84,7 @@ export function ProfileForm() {
   function uploadFileCheck(e) {
     uploadUserProfilePic(
       e.target.files[0],
-      uniqueId,
+      currentUser.id,
       currentUser.email,
       setProfilePic
     );

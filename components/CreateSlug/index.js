@@ -4,7 +4,7 @@ import { updateLocationSlug } from "../../utils/firebasePostRequests";
 import { toastNotification } from "../atoms/toastNotification";
 
 export function CreateSlug({ locationData }) {
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   const [slugData, setSlugData] = useState(
     locationData.slug ? locationData.slug : null
   );
@@ -19,7 +19,7 @@ export function CreateSlug({ locationData }) {
   function callSaveSlug(e) {
     e.preventDefault();
     updateLocationSlug(
-      uniqueId,
+      currentUser.id,
       locationData.id,
       slugData,
       function (fetchedData) {

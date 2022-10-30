@@ -12,17 +12,17 @@ import { useAuth } from "../../../context/AuthContext";
 import { getBrandDetails } from "../../../utils/supabaseGetRequests";
 
 export default function BrandPage() {
-  const uniqueId = "9030169c-e80c-4e73-9655-9cb14565ac65";
+  const { currentUser } = useAuth();
   const router = useRouter();
   const { brand } = router.query;
   const [brandData, setBrandData] = useState(null);
   useEffect(() => {
-    if (brand && uniqueId) {
-      getBrandDetails(uniqueId, brand, function (fetchedData) {
+    if (brand && currentUser) {
+      getBrandDetails(currentUser.id, brand, function (fetchedData) {
         setBrandData(fetchedData);
       });
     }
-  }, [brand, uniqueId]);
+  }, [brand, currentUser]);
 
   if (brandData === false) {
     return <NoDataPage />;
