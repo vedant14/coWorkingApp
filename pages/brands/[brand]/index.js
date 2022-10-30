@@ -4,9 +4,7 @@ import {
   BrandInfoPage,
   NoDataPage,
   PageHeading,
-  PageLoader,
   PrivateLayout,
-  UserList,
 } from "../../../components";
 import { useAuth } from "../../../context/AuthContext";
 import { getBrandDetails } from "../../../utils/supabaseGetRequests";

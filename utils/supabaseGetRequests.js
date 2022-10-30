@@ -14,7 +14,7 @@ export async function getAdminBrandData(uniqueId, callback) {
 export async function getBrandDetails(uniqueId, brandId, callback) {
   let { data: brandData, error } = await supabase
     .from("brands")
-    .select(`id,name, locations(id, name), brand_users(id, user_id(*))`)
+    .select(`id,name, slug, locations(id, name), brand_users(id, user_id(*))`)
     .eq("id", brandId);
   if (error) {
     return callback(error);
@@ -59,5 +59,29 @@ export async function getUserProfile(uniqueId, callback) {
   } else {
     // TODO CHECK IF USER IS ADMIN
     return callback(userData[0]);
+  }
+}
+
+export async function getLocationName(locationdId, callback) {
+  let { data: locationData, error } = await supabase
+    .from("locations")
+    .select(`id,name, brands(name)`)
+    .eq("id", locationdId);
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(locationData[0]);
+  }
+}
+
+export async function getPublicBrandData(slug, callback) {
+  let { data: brands, error } = await supabase
+    .from("brands")
+    .select(`id,name,description,locations(id)`)
+    .eq("slug", slug);
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(brands[0]);
   }
 }
