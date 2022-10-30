@@ -52,7 +52,6 @@ export default function BrandPage() {
           secondaryText="Edit Brand"
         />
         <BrandInfoPage brandData={brandData} />
-        <UserList />
       </PrivateLayout>
     );
   }

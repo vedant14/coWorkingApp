@@ -14,7 +14,7 @@ export async function getAdminBrandData(uniqueId, callback) {
 export async function getBrandDetails(uniqueId, brandId, callback) {
   let { data: brandData, error } = await supabase
     .from("brands")
-    .select(`id,name, locations(id), brand_users(user_id)`)
+    .select(`id,name, locations(id, name), brand_users(id, user_id(*))`)
     .eq("id", brandId);
   if (error) {
     return callback(error);

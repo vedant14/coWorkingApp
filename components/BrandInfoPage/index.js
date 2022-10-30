@@ -1,8 +1,6 @@
-import { UsersIcon, LocationMarkerIcon } from "@heroicons/react/solid";
 import { randomIntFromInterval } from "../../utils/helperFunctions";
-import { UserList } from "../UserList";
-import Link from "next/link";
 import { LocationList } from "./locationList";
+import { UserList } from "../UserList";
 export function BrandInfoPage({ brandData }) {
   return (
     <div>
@@ -82,8 +80,7 @@ export function BrandInfoPage({ brandData }) {
           <div className="grid grid-cols-1 gap-4">
             <section aria-labelledby="section-2-title">
               <div className="rounded-lg bg-white overflow-hidden shadow">
-                <div className="p-6">Users</div>
-                {/* <UserList /> */}
+                <UserList userData={brandData.brand_users} />
               </div>
             </section>
           </div>
