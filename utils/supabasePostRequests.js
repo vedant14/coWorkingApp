@@ -21,11 +21,21 @@ export async function createBrand(name, uniqueId, callback) {
 async function createBrandUser(brandId, uniqueId, callback) {
   const { data, error } = await supabase
     .from("brand_users")
-    .insert([{ brand_id: brandId, user_id: uniqueId, created_by: uniqueId }])
-    .select();
+    .insert([{ brand_id: brandId, user_id: uniqueId, created_by: uniqueId }]);
   if (error) {
     return callback(error);
   } else {
-    return callback(data[0]);
+    return callback(true);
+  }
+}
+
+export async function createLocation(name, uniqueId, brand_id, callback) {
+  const { data, error } = await supabase
+    .from("locations")
+    .insert([{ name: name, city: "Nagpur", country: "IND", state: "MH" }]);
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(true);
   }
 }
