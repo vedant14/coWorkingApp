@@ -19,7 +19,6 @@ export default function BrandPage() {
   useEffect(() => {
     if (brand && uniqueId) {
       getBrandDetails(uniqueId, brand, function (fetchedData) {
-        console.log("HRE", fetchedData);
         setBrandData(fetchedData);
       });
     }

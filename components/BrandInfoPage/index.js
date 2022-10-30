@@ -1,6 +1,6 @@
 import { randomIntFromInterval } from "../../utils/helperFunctions";
 import { LocationList } from "./locationList";
-import { UserList } from "../UserList";
+import { UserList } from "./userList";
 export function BrandInfoPage({ brandData }) {
   return (
     <div>

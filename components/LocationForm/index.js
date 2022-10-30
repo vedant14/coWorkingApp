@@ -21,7 +21,6 @@ export function LocationForm({ brandId, locationId, locationData }) {
       } else {
         createLocation(name, uniqueId, brandId, function (response) {
           // toastNotification(response)
-          console.log(response);
         });
       }
     }

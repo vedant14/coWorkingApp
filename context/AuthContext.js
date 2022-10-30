@@ -1,6 +1,5 @@
 import { useEffect, useState, createContext, useContext } from "react";
-import { auth } from "../utils/firebaseConfig";
-import { getUserProfile } from "../utils/firebaseGetRequests";
+import { supabase } from "../utils/supabaseClient";
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -10,36 +9,34 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [uniqueId, setUniqueId] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
   const [authenticatedState, setAuthenticatedState] =
     useState("not-authenticated");
-
-  async function checkUser() {
-    const user = await auth.currentUser;
-    if (user) {
-      getUserProfile(setCurrentUser, user.uid);
-      setAccessToken(user.accessToken);
-    }
-  }
-
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUniqueId(user.uid);
-        setAuthenticatedState("authenticated");
-      } else {
-        setCurrentUser(null);
-        setUniqueId(null);
-        setAccessToken(null);
-        setAuthenticatedState("not-authenticated");
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        handleAuthChange(event, session);
+        if (event === "SIGNED_IN") {
+          setUniqueId(session.user.id);
+          setCurrentUser(session.user);
+          setAuthenticatedState("authenticated");
+        }
+        if (event === "SIGNED_OUT") {
+          setCurrentUser(null);
+          setUniqueId(null);
+          setAuthenticatedState("not-authenticated");
+        }
       }
-    });
-    return unsubscribe;
+    );
   }, []);
 
-  useEffect(() => {
-    checkUser();
-  }, [authenticatedState]);
+  async function handleAuthChange(event, session) {
+    await fetch("/api/auth", {
+      method: "POST",
+      headers: new Headers({ "Content-Type": "application/json" }),
+      credentials: "same-origin",
+      body: JSON.stringify({ event, session }),
+    });
+  }
 
   let sharedState = {
     currentUser,

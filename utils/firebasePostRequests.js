@@ -246,7 +246,6 @@ async function verifySlugFuntion(locationId, slug) {
       return true;
     } else {
       if (querySnapshot.docs[0].id === locationId) {
-        // querySnapshot.docs.map((doc) => console.log(doc.id()));
         return true;
       } else {
         return false;

@@ -48,3 +48,16 @@ export async function getBrandLocations(brandId, callback) {
     return callback(locationData[0]);
   }
 }
+
+export async function getUserProfile(uniqueId, callback) {
+  let { data: userData, error } = await supabase
+    .from("profiles")
+    .select(`*`)
+    .eq("id", uniqueId);
+  if (error) {
+    return callback(error);
+  } else {
+    // TODO CHECK IF USER IS ADMIN
+    return callback(userData[0]);
+  }
+}

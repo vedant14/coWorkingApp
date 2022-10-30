@@ -15,7 +15,6 @@ export * from "./CreateCoworking";
 export * from "./ShowAllBrands";
 export * from "./PageHeading";
 export * from "./NoDataPage";
-export * from "./UserList";
 export * from "./LocationForm";
 export * from "./CreateSlug";
 export * from "./BrandShowCase";

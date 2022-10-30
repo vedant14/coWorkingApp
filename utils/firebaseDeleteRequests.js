@@ -27,7 +27,6 @@ async function deleteAllLocationUser(brandId) {
 
 async function deleteLocationUser(id) {
   await deleteDoc(doc(db, "location_users", id));
-  // console.log("DeleteLocationUsers");
 }
 
 async function deleteAllLocations(brandId) {
@@ -41,7 +40,6 @@ async function deleteAllLocations(brandId) {
 
 async function deleteLocation(id) {
   await deleteDoc(doc(db, "locations", id));
-  // console.log("locations");
 }
 
 async function deleteAllBrandUsers(brandId) {
@@ -55,9 +53,7 @@ async function deleteAllBrandUsers(brandId) {
 
 async function deleteBrandUser(id) {
   await deleteDoc(doc(db, "brand_users", id));
-  // console.log("brandUsers");
 }
 async function deleteBrandClean(id) {
   await deleteDoc(doc(db, "brands", id));
-  // console.log("brands");
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SplitLayout } from "../components";
-import { userSignUpEmail } from "../utils/firebaseUserRequests";
+import { userSignUpEmail } from "../utils/supabaseUserRequests";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -29,7 +29,7 @@ export default function SignUp() {
         lastName.trim(),
         userEmail.trim(),
         password,
-        setError
+        function (response) {}
       );
     }
   }

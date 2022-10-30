@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { userLoginEmail } from "../utils/firebaseUserRequests";
+import { userLoginEmail } from "../utils/supabaseUserRequests";
 import { SplitLayout } from "../components";
 import { InputText } from "../components/atoms/inputText";
 import { useAuth } from "../context/AuthContext";
@@ -17,7 +17,7 @@ export default function Login() {
     if (userEmail === "" || password === "") {
       setError("Please fill all the fields");
     } else {
-      userLoginEmail(userEmail, password, setError);
+      userLoginEmail(userEmail, password, function (response) {});
     }
   }
   if (uniqueId) {
