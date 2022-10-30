@@ -43,8 +43,8 @@ export default function BrandPage() {
           name={brandData.name}
           subtext="All information of this brand"
           breadcrumbs={breadCrumbsData}
-          primaryText="New Location"
-          primaryLink={`/brands/${brand}/new-location`}
+          primaryText="Visit Brand Page"
+          primaryLink={`/book/${brandData.slug}`}
           secondaryLink={`/brands/${brand}/edit`}
           secondaryText="Edit Brand"
         />

@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import Link from "next/link";
 import { Card } from "../atoms/card";
-export function UserList({ userData }) {
+export function UserList({ brandId, userData }) {
   if (!userData || userData.length === 0) {
     return null;
   } else {
@@ -16,7 +16,7 @@ export function UserList({ userData }) {
   function UserDetails() {
     return (
       <Card>
-        <div className="pl-6 border-b border-gray-200">
+        <div className="pl-6 mt-5 border-b border-gray-200">
           <dt className="text-md font-medium text-gray-500 mb-4">
             Brand Users
           </dt>
@@ -63,6 +63,20 @@ export function UserList({ userData }) {
               </Link>
             </li>
           ))}
+          <li>
+            <div className="px-4 py-4 sm:px-6">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-neutral-600 truncate">
+                  Click here to{" "}
+                  <Link href={`/brands/${brandId}/new-location`}>
+                    <a className="text-dark-green text-bold underline">
+                      invite a new user
+                    </a>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </li>
         </ul>
       </Card>
     );

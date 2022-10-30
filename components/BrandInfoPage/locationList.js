@@ -15,7 +15,7 @@ export function LocationList({ brandId, locationData }) {
   function LocationDetailCard() {
     return (
       <Card>
-        <div className="pl-6 border-b border-gray-200">
+        <div className="pl-6 mt-5 border-b border-gray-200">
           <dt className="text-md font-medium text-gray-500 mb-4">
             Brand Locations
           </dt>
@@ -62,6 +62,20 @@ export function LocationList({ brandId, locationData }) {
               </Link>
             </li>
           ))}
+          <li>
+            <div className="px-4 py-4 sm:px-6">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-neutral-600 truncate">
+                  Click here to{" "}
+                  <Link href={`/brands/${brandId}/new-location`}>
+                    <a className="text-dark-green text-bold underline">
+                      add a new location
+                    </a>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </li>
         </ul>
       </Card>
     );

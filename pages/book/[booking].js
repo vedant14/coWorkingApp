@@ -41,10 +41,6 @@ export default function MentorPage() {
   }
 
   function DoBookingPage() {
-    return (
-      <BookingLayout>
-        <BrandShowCase bookingData={bookingData} />
-      </BookingLayout>
-    );
+    return <BrandShowCase bookingData={bookingData} />;
   }
 }

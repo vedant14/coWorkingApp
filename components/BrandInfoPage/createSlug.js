@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
 import { Card } from "../atoms/card";
+import { updateSlug } from "../../utils/supabasePostRequests";
 
 export function CreateSlug({ brandData }) {
   const { currentUser } = useAuth();
+  const [updated, setUpdated] = useState(false);
   const [slugData, setSlugData] = useState(
     brandData.slug ? brandData.slug : ""
   );
@@ -18,23 +20,19 @@ export function CreateSlug({ brandData }) {
 
   function callSaveSlug(e) {
     e.preventDefault();
-    updateSlug(
-      currentUser.id,
-      locationData.id,
-      slugData,
-      function (fetchedData) {
-        if (fetchedData.success === false) {
-          toastNotification("URL is wrong", fetchedData.message, "danger");
-        } else {
-          toastNotification("URL is working", fetchedData.message, "success");
-        }
+    updateSlug(currentUser.id, brandData.id, slugData, function (fetchedData) {
+      if (fetchedData !== true) {
+        toastNotification("URL is wrong", fetchedData.message, "danger");
+      } else {
+        toastNotification("URL is updated!", fetchedData.message, "success");
+        setUpdated(true);
       }
-    );
+    });
   }
 
   return (
     <Card>
-      <div className="lg:mt-0 mt-6 px-6">
+      <div className="py-5 lg:mt-0 mt-6 px-6">
         <div className="flex items-center space-x-2">
           <div className="shrink-0 cursor-pointer" onClick={copyText}>
             <img src="/icons/display/link-blue.svg" alt="link" />
@@ -66,24 +64,30 @@ export function CreateSlug({ brandData }) {
             </button>
           </div>
           <div className="my-2">
-            <span
-              className="italic text-sm font-medium text-gray-700 cursor-pointer underline"
-              onClick={(e) => copyText()}
-            >
-              Copy URL
-            </span>
-            <span> / </span>
-            <span
-              className="italic text-sm font-medium text-gray-700 cursor-pointer underline"
-              onClick={(e) => copyText()}
-            >
-              <a
-                href={`${process.env.NEXT_PUBLIC_URL}/book/${brandData.slug}`}
-                target="_blank"
-              >
-                Open URL
-              </a>
-            </span>
+            {updated === true ? (
+              <div>Refresh the page</div>
+            ) : (
+              <>
+                <span
+                  className="italic text-sm font-medium text-gray-700 cursor-pointer underline"
+                  onClick={(e) => copyText()}
+                >
+                  Copy URL
+                </span>
+                <span> / </span>
+                <span
+                  className="italic text-sm font-medium text-gray-700 cursor-pointer underline"
+                  onClick={(e) => copyText()}
+                >
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_URL}/book/${brandData.slug}`}
+                    target="_blank"
+                  >
+                    Open URL
+                  </a>
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>

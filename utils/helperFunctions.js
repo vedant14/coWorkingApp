@@ -50,3 +50,12 @@ export function displayDate(inputDate) {
   const monthName = months[inputDate.getMonth()];
   return date + ", " + monthName + " " + year;
 }
+
+export function slugify(str) {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}

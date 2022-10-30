@@ -3,7 +3,7 @@ import { randomIntFromInterval } from "../../utils/helperFunctions";
 export function BrandDetailsSection(brandData) {
   return (
     <Card>
-      <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+      <dl className="grid grid-cols-1 gap-x-4 gap-y-8 py-5 sm:grid-cols-2">
         <div className="sm:col-span-2 px-6">
           <dt className="text-sm font-medium text-gray-500">
             Brand Description

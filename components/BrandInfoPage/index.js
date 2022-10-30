@@ -1,5 +1,3 @@
-import { randomIntFromInterval } from "../../utils/helperFunctions";
-import { Card } from "../atoms/card";
 import { BrandDetailsSection } from "./brandDetails";
 import { CreateSlug } from "./createSlug";
 import { LocationList } from "./locationList";

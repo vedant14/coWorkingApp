@@ -74,7 +74,7 @@ const faqs = [
   },
   // More FAQs...
 ];
-const tabs = ["Reviews", "FAQs"];
+const tabs = ["About Us", "Reviews", "FAQs"];
 export function ShowSections() {
   return (
     <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
@@ -99,6 +99,14 @@ export function ShowSections() {
           </Tab.List>
         </div>
         <Tab.Panels as={Fragment}>
+          <Tab.Panel className="pt-10">
+            <h3 className="sr-only">License</h3>
+
+            <div
+              className="prose prose-sm max-w-none text-gray-500"
+              dangerouslySetInnerHTML={{ __html: license.content }}
+            />
+          </Tab.Panel>
           <Tab.Panel className="-mb-10">
             <h3 className="sr-only">Customer Reviews</h3>
 
@@ -163,15 +171,6 @@ export function ShowSections() {
                 </dd>
               </Fragment>
             ))}
-          </Tab.Panel>
-
-          <Tab.Panel className="pt-10">
-            <h3 className="sr-only">License</h3>
-
-            <div
-              className="prose prose-sm max-w-none text-gray-500"
-              dangerouslySetInnerHTML={{ __html: license.content }}
-            />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
