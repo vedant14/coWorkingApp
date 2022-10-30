@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import {
-  createBrand,
-  createLocation,
-  updateBrand,
-} from "../../utils/firebasePostRequests";
+import { updateBrand } from "../../utils/firebasePostRequests";
+import { createLocation } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
 export function LocationForm({ brandId, locationId, locationData }) {
   const [name, setName] = useState("");
-  const { uniqueId } = useAuth();
+  const uniqueId = "9030169c-e80c-4e73-9655-9cb14565ac65";
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "" && brandId && uniqueId) {
@@ -22,7 +19,10 @@ export function LocationForm({ brandId, locationId, locationData }) {
       if (locationData) {
         updateBrand({ name, brandId });
       } else {
-        createLocation({ name, brandId, uniqueId });
+        createLocation(name, uniqueId, brandId, function (response) {
+          // toastNotification(response)
+          console.log(response);
+        });
       }
     }
   }

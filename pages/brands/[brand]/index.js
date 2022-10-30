@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
   BrandInfoPage,
-  LocationList,
   NoDataPage,
   PageHeading,
   PageLoader,
@@ -10,16 +9,17 @@ import {
   UserList,
 } from "../../../components";
 import { useAuth } from "../../../context/AuthContext";
-import { getBrandDetails } from "../../../utils/firebaseGetRequests";
+import { getBrandDetails } from "../../../utils/supabaseGetRequests";
 
 export default function BrandPage() {
-  const { uniqueId } = useAuth();
+  const uniqueId = "9030169c-e80c-4e73-9655-9cb14565ac65";
   const router = useRouter();
-  const [brandData, setBrandData] = useState(null);
   const { brand } = router.query;
+  const [brandData, setBrandData] = useState(null);
   useEffect(() => {
     if (brand && uniqueId) {
       getBrandDetails(uniqueId, brand, function (fetchedData) {
+        console.log("HRE", fetchedData);
         setBrandData(fetchedData);
       });
     }
@@ -28,7 +28,7 @@ export default function BrandPage() {
   if (brandData === false) {
     return <NoDataPage />;
   } else if (!brandData) {
-    return <PageLoader />;
+    return <NoDataPage />;
   } else {
     return <ShowBrandPage />;
   }

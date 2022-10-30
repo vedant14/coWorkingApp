@@ -21,7 +21,7 @@ export function CreateCoworking({ brandId, brandData }) {
         updateBrand({ name, brandId });
       } else {
         createBrand(name, uniqueId, function (response) {
-          console.log(response);
+          // toastNotification(response, "HEY", )
         });
       }
     }

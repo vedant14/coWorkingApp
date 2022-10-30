@@ -7,7 +7,7 @@ import {
   PrivateLayout,
 } from "../../../components";
 import { useRouter } from "next/router";
-import { getBrandDetails } from "../../../utils/firebaseGetRequests";
+import { getBrandName } from "../../../utils/supabaseGetRequests";
 
 export default function NewLocation() {
   const router = useRouter();
@@ -15,7 +15,9 @@ export default function NewLocation() {
   const { brand } = router.query;
   useEffect(() => {
     if (brand) {
-      getBrandDetails(brand, setBrandData);
+      getBrandName(brand, function (fetchedData) {
+        setBrandData(fetchedData);
+      });
     }
   }, [brand]);
 

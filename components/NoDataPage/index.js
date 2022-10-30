@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { PrivateLayout } from "../PrivateLayout";
 export function NoDataPage() {
   return (
     <PrivateLayout>

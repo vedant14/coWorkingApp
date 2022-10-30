@@ -32,7 +32,15 @@ async function createBrandUser(brandId, uniqueId, callback) {
 export async function createLocation(name, uniqueId, brand_id, callback) {
   const { data, error } = await supabase
     .from("locations")
-    .insert([{ name: name, city: "Nagpur", country: "IND", state: "MH" }]);
+    .insert([
+      {
+        name: name,
+        brand_id: brand_id,
+        city: "Nagpur",
+        country: "IND",
+        state: "MH",
+      },
+    ]);
   if (error) {
     return callback(error);
   } else {
