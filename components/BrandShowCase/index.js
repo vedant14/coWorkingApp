@@ -5,6 +5,7 @@ import { ShowSections } from "./showSections";
 import { classNames } from "../../utils/helperFunctions";
 import { Socials } from "./socials";
 import { Hero } from "./hero";
+import { Nav } from "./nav";
 const product = {
   name: "Application UI Icon Pack",
   version: { name: "1.0", date: "June 5, 2021", datetime: "2021-06-05" },
@@ -53,10 +54,10 @@ const license = {
 };
 
 export function BrandShowCase({ bookingData }) {
-  console.log(bookingData);
   return (
-    <div>
-      <Hero />
+    <>
+      <Nav />
+      <Hero coverImage="https://images.unsplash.com/photo-1572025442646-866d16c84a54?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
       <LocationImages />
       <div className="my-6">
         <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
@@ -65,6 +66,6 @@ export function BrandShowCase({ bookingData }) {
         <p>{bookingData.description}</p>
       </div>
       <div></div>
-    </div>
+    </>
   );
 }
