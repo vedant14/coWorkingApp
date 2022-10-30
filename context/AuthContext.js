@@ -26,9 +26,6 @@ export function AuthProvider({ children }) {
         }
       }
     );
-    return () => {
-      if (authListener) authListener.unsubscribe();
-    };
   }, []);
 
   useEffect(() => {
