@@ -14,6 +14,9 @@ module.exports = {
         "primary-gradient":
           "linear-gradient(139.83deg, #56B5DA -1.86%, #62D6BA 117.55%);",
       },
+      dropShadow: {
+        "custom-button": "5px 5px 0px rgba(209,167,87,1) ",
+      },
     },
   },
   // plugins: [require("@tailwindcss/forms")],

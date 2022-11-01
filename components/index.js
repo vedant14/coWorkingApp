@@ -18,3 +18,4 @@ export * from "./NoDataPage";
 export * from "./LocationForm";
 export * from "./BrandShowCase";
 export * from "./BrandInfoPage";
+export * from "./CheckoutForm";

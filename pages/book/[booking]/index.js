@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BookingLayout, BrandShowCase, PageLoader } from "../../components";
-import { getPublicBookingData } from "../../utils/firebasePublicDataRequests";
-import { getPublicBrandData } from "../../utils/supabaseGetRequests";
+import { BookingLayout, BrandShowCase, PageLoader } from "../../../components";
+import { getPublicBrandData } from "../../../utils/supabaseGetRequests";
 export default function MentorPage() {
   const router = useRouter();
   const [bookingData, setBookingData] = useState(null);
@@ -41,6 +40,6 @@ export default function MentorPage() {
   }
 
   function DoBookingPage() {
-    return <BrandShowCase bookingData={bookingData} />;
+    return <BrandShowCase slug={booking} bookingData={bookingData} />;
   }
 }

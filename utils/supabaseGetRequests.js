@@ -77,7 +77,7 @@ export async function getLocationName(locationdId, callback) {
 export async function getPublicBrandData(slug, callback) {
   let { data: brands, error } = await supabase
     .from("brands")
-    .select(`id,name,description,locations(id)`)
+    .select(`id,name,description,locations(id, name)`)
     .eq("slug", slug);
   if (error) {
     return callback(error);
