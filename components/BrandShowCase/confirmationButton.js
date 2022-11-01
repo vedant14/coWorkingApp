@@ -6,12 +6,13 @@ export function ConfirmationButton({ slug, open, setOpen, locationData }) {
     e.preventDefault();
     setOpen((prevOpen) => !prevOpen);
   }
+
   return (
     <div>
       <button
         type="button"
         onClick={(e) => toggleButton(e)}
-        className="bg-white border-2 border-dark-green w-full py-4 drop-shadow-custom-button "
+        className="bg-white border-2 border-dark-green w-full py-4 drop-shadow-[5px_5px_0px_rgba(209,167,87,1)]"
       >
         <div className="inline-flex items-center font-medium">
           Confirm your seat
