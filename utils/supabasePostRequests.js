@@ -57,3 +57,21 @@ export async function updateSlug(uniqueId, brand_id, slug, callback) {
     return callback(error);
   } else return callback(true);
 }
+
+export async function createOrder(phone, brand_id, locationId, callback) {
+  // check for user admin
+  const { data, error } = await supabase
+    .from("orders")
+    .insert([
+      {
+        phone: phone,
+        brand_id: brand_id,
+        locationId: locationId,
+      },
+    ])
+    .select();
+  console.log("Hi");
+  if (error) {
+    return callback(error);
+  } else return callback(data.id);
+}
