@@ -59,3 +59,12 @@ export function slugify(str) {
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+export function incrementArray(array, start, end) {
+  for (let i = start; i < end; i++) {
+    array.push({
+      id: i,
+      name: i,
+    });
+  }
+}

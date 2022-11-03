@@ -6,21 +6,21 @@ import { PageLoaderSpinner } from "./pageLoader";
 import { SuccessModal } from "./successModal";
 import { makePayment } from "../../utils/paymentCalls";
 import passArray from "../../data/passArray.json";
+import { incrementArray } from "../../utils/helperFunctions";
 
 var quanityArray = [];
+var seatsArray = [];
 
-for (let i = 1; i < 30; i++) {
-  quanityArray.push({
-    id: i,
-    name: i,
-  });
-}
+incrementArray(quanityArray, 1, 30);
+incrementArray(seatsArray, 1, 10);
+
 export function CheckoutForm({ bookingData }) {
   const [selectedPass, setSelectedPass] = useState(passArray[2]);
   const [selectedLocation, setSelectedLocation] = useState(
     bookingData.locations[0]
   );
   const [selectedQuantity, setSelectedQuantity] = useState(quanityArray[10]);
+  const [selectedSeats, setSelectedSeats] = useState(seatsArray[0]);
   const [modal, setModal] = useState(false);
   const [loader, setLoader] = useState(false);
   var label = `No. of ${selectedPass.metric}`;
@@ -59,6 +59,13 @@ export function CheckoutForm({ bookingData }) {
           setSelected={setSelectedPass}
         />
         <DropDown
+          type="Seats"
+          label="No of seats"
+          optionsArray={seatsArray}
+          selected={selectedSeats}
+          setSelected={setSelectedSeats}
+        />
+        <DropDown
           type="Quanity"
           label={label}
           optionsArray={quanityArray}
@@ -73,6 +80,10 @@ export function CheckoutForm({ bookingData }) {
           <div className="flex justify-between">
             <div>Pass type</div>
             <div>Monthly</div>
+          </div>
+          <div className="flex justify-between">
+            <div># of seats</div>
+            <div> {selectedSeats.name} </div>
           </div>
           <div className="flex justify-between">
             <div>{label}</div>
