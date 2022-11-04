@@ -4,6 +4,7 @@ import {
   BrandInfoPage,
   NoDataPage,
   PageHeading,
+  PageLoader,
   PrivateLayout,
 } from "../../../components";
 import { useAuth } from "../../../context/AuthContext";
@@ -25,7 +26,7 @@ export default function BrandPage() {
   if (brandData === false) {
     return <NoDataPage />;
   } else if (!brandData) {
-    return <NoDataPage />;
+    return <PageLoader />;
   } else {
     return <ShowBrandPage />;
   }

@@ -2,7 +2,7 @@ import { getInitials } from "../../utils/helperFunctions";
 import Link from "next/link";
 export function BrandCard({ item }) {
   return (
-    <li className="p-4 bg-neutral-50">
+    <li className="p-4 border-b">
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
           <div className="bg-dark-green h-10 w-10 text-light-green flex justify-center items-center rounded-full">
