@@ -1,60 +1,61 @@
 import {
+  CheckCircleIcon,
   ChevronRightIcon,
-  LocationMarkerIcon,
-  UsersIcon,
+  MailIcon,
+  UserIcon,
 } from "@heroicons/react/solid";
 import Link from "next/link";
 import { Card } from "../atoms/card";
-export function LocationList({ brandId, locationData }) {
-  if (!locationData) {
+export function UserList({ brandId, userData }) {
+  if (!userData || userData.length === 0) {
     return null;
-  } else if (locationData.length === 0) {
-    return <NoLocationCard />;
-  } else return <LocationDetailCard />;
+  } else {
+    return <UserDetails />;
+  }
 
-  function LocationDetailCard() {
+  function UserDetails() {
     return (
       <Card>
         <div className="pl-6 mt-5 border-b border-gray-200">
           <dt className="text-md font-medium text-gray-500 mb-4">
-            Brand Locations
+            Brand Users
           </dt>
         </div>
         <ul role="list" className="divide-y divide-gray-200">
-          {locationData.map((item, i) => (
+          {userData.map((user, i) => (
             <li key={i}>
-              <Link href={`/brands/${brandId}/${item.id}`} passHref>
+              <Link href={`/${userData.id}`} passHref>
                 <a className="block hover:bg-gray-50">
                   <div className="px-4 py-4 sm:px-6">
                     <div className="flex items-center justify-between">
                       <p className="text-sm flex items-center font-medium text-neutral-700 truncate">
-                        <LocationMarkerIcon
+                        <UserIcon
                           className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                           aria-hidden="true"
                         />
-                        {item.name}
+                        {user.user_id.first_name} {user.user_id.last_name}
                       </p>
                       <div className="ml-2 flex-shrink-0 flex">
                         <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Open
+                          Admin
                         </p>
                       </div>
                     </div>
                     <div className="mt-2 sm:flex justify-between">
                       <div className="sm:flex">
-                        <p className="flex items-center text-sm text-gray-500">
-                          <UsersIcon
+                        <p className="flex truncate items-center text-sm text-gray-500">
+                          <MailIcon
                             className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                             aria-hidden="true"
                           />
-                          Manager
+                          {user.user_id.email}
                         </p>
-                        <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                          <ChevronRightIcon
-                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </p>
+                      </div>
+                      <div>
+                        <ChevronRightIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
                       </div>
                     </div>
                   </div>
@@ -69,7 +70,7 @@ export function LocationList({ brandId, locationData }) {
                   Click here to{" "}
                   <Link href={`/brands/${brandId}/new-location`}>
                     <a className="text-dark-green text-bold underline">
-                      add a new location
+                      invite a new user
                     </a>
                   </Link>
                 </p>
@@ -78,22 +79,6 @@ export function LocationList({ brandId, locationData }) {
           </li>
         </ul>
       </Card>
-    );
-  }
-  function NoLocationCard() {
-    return (
-      <li>
-        <div className="px-4 py-4 sm:px-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-neutral-600 truncate">
-              No locations yet for this brand{" "}
-              <Link href={`/brands/${brandId}/new-location`}>
-                <a className="text-dark-green text-bold underline">Add one</a>
-              </Link>
-            </p>
-          </div>
-        </div>
-      </li>
     );
   }
 }

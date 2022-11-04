@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import {
-  updateUserProfile,
-  uploadUserProfilePic,
-} from "../../utils/firebasePostRequests";
+// import {
+//   updateUserProfile,
+//   uploadUserProfilePic,
+// } from "../../utils/firebasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { InputTextArea } from "../atoms/inputTextArea";
 import { MultiSelectOptions } from "../atoms/multiSelect";
 import { toastNotification } from "../atoms/toastNotification";
 export function ProfileForm() {
-  const { uniqueId, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const [firstName, setFirstName] = useState(currentUser.firstName);
   const [lastName, setLastName] = useState(currentUser.lastName);
   const [slug, setSlug] = useState(currentUser.slug);
@@ -56,19 +56,19 @@ export function ProfileForm() {
     } else if (lastName === "") {
       toastNotification("Last name cannot be empty!", " ", "danger");
     } else {
-      updateUserProfile({
-        userId: uniqueId,
-        firstName: firstName,
-        lastName: lastName,
-        slug: slug,
-        bio: bio,
-        amount: amount,
-        linkedInUrl: linkedInUrl,
-        selectedLanguages: selectedLanguages,
-        profileForm: true,
-        profilePic: profilePic === null ? false : profilePic,
-        mentorServices: mentorServices,
-      });
+      // updateUserProfile({
+      //   userId: currentUser.id,
+      //   firstName: firstName,
+      //   lastName: lastName,
+      //   slug: slug,
+      //   bio: bio,
+      //   amount: amount,
+      //   linkedInUrl: linkedInUrl,
+      //   selectedLanguages: selectedLanguages,
+      //   profileForm: true,
+      //   profilePic: profilePic === null ? false : profilePic,
+      //   mentorServices: mentorServices,
+      // });
     }
   }
 
@@ -82,12 +82,12 @@ export function ProfileForm() {
   }
 
   function uploadFileCheck(e) {
-    uploadUserProfilePic(
-      e.target.files[0],
-      uniqueId,
-      currentUser.email,
-      setProfilePic
-    );
+    // uploadUserProfilePic(
+    //   e.target.files[0],
+    //   currentUser.id,
+    //   currentUser.email,
+    //   setProfilePic
+    // );
   }
 
   function copyText() {

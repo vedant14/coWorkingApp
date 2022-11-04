@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "Daily Pass",
+    "metric": "days"
+  },
+  {
+    "id": "2",
+    "name": "Weekly Pass",
+    "metric": "weeks"
+  },
+  {
+    "id": "3",
+    "name": "Monthly Pass",
+    "metric": "months"
+  }
+]

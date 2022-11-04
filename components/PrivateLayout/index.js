@@ -5,8 +5,8 @@ import { SideBar } from "../SideBar";
 import { Header } from "../Header";
 
 export function PrivateLayout({ title, description, children }) {
-  const { uniqueId, currentUser } = useAuth();
-  if (!uniqueId || !currentUser) {
+  const { currentUser } = useAuth();
+  if (!currentUser) {
     return <PageLoader />;
   } else {
     return <LayoutContent />;

@@ -7,14 +7,14 @@ import {
   PageLoader,
   PrivateLayout,
 } from "../../../components";
-import { getBrandDetails } from "../../../utils/firebaseGetRequests";
+
 export default function Edit() {
   const router = useRouter();
   const [brandData, setBrandData] = useState(null);
   const { brand } = router.query;
   useEffect(() => {
     if (brand) {
-      getBrandDetails(brand, setBrandData);
+      // getBrandDetails(brand, setBrandData);
     }
   }, [brand]);
   if (brandData === false) {

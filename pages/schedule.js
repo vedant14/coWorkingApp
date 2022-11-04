@@ -8,13 +8,13 @@ import { useAuth } from "../context/AuthContext";
 import { getEditScheduleData } from "../utils/firebaseGetRequests";
 export default function SchedulePage() {
   const [editData, setEditData] = useState(null);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (uniqueId) {
-      getEditScheduleData(uniqueId, setEditData);
+    if (currentUser) {
+      getEditScheduleData(currentUser.id, setEditData);
     }
-  }, [uniqueId]);
+  }, [currentUser]);
 
   return (
     <PrivateLayout>

@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import {
-  getTodayUserBookings,
-  getUpcomingUserBookings,
-} from "../../utils/firebaseGetRequests";
+// import {
+//   getTodayUserBookings,
+//   getUpcomingUserBookings,
+// } from "../../utils/firebaseGetRequests";
 import { displayDate, displaySlotData } from "../../utils/helperFunctions";
 
 export function UpcomingBookings({ today }) {
   const [bookingData, setBookingData] = useState(null);
-  const { uniqueId, currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     if (today === true) {
-      getTodayUserBookings(uniqueId, setBookingData);
+      // getTodayUserBookings(currentUser.id, setBookingData);
     } else {
-      getUpcomingUserBookings(uniqueId, setBookingData);
+      // getUpcomingUserBookings(currentUser.id, setBookingData);
     }
-  }, [uniqueId]);
+  }, [currentUser]);
 
   function HandleBookingData() {
     if (bookingData === null || bookingData.length === 0) {

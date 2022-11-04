@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { userLoginEmail } from "../utils/firebaseUserRequests";
+import { userLoginEmail } from "../utils/supabaseUserRequests";
 import { SplitLayout } from "../components";
 import { InputText } from "../components/atoms/inputText";
 import { useAuth } from "../context/AuthContext";
@@ -10,17 +10,17 @@ export default function Login() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
   async function userLogin(e) {
     e.preventDefault();
     if (userEmail === "" || password === "") {
       setError("Please fill all the fields");
     } else {
-      userLoginEmail(userEmail, password, setError);
+      userLoginEmail(userEmail, password, function (response) {});
     }
   }
-  if (uniqueId) {
+  if (currentUser) {
     router.push("/dashboard");
   }
   return (

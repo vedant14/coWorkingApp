@@ -50,3 +50,21 @@ export function displayDate(inputDate) {
   const monthName = months[inputDate.getMonth()];
   return date + ", " + monthName + " " + year;
 }
+
+export function slugify(str) {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function incrementArray(array, start, end) {
+  for (let i = start; i < end; i++) {
+    array.push({
+      id: i,
+      name: i,
+    });
+  }
+}

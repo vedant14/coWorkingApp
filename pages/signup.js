@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SplitLayout } from "../components";
-import { userSignUpEmail } from "../utils/firebaseUserRequests";
+import { userSignUpEmail } from "../utils/supabaseUserRequests";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { uniqueId } = useAuth();
+  const { currentUser } = useAuth();
   const router = useRouter();
   async function callUserSignup(e) {
     e.preventDefault();
@@ -29,11 +29,11 @@ export default function SignUp() {
         lastName.trim(),
         userEmail.trim(),
         password,
-        setError
+        function (response) {}
       );
     }
   }
-  if (uniqueId) {
+  if (currentUser) {
     router.push("/dashboard");
   }
   return (

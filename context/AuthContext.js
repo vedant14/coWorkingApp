@@ -1,40 +1,31 @@
-import { useEffect, useState, createContext, useContext } from "react";
-import { auth } from "../utils/firebaseConfig";
-import { getUserProfile } from "../utils/firebaseGetRequests";
+import { createContext, useContext, useState, useEffect } from "react";
+import { supabase } from "../utils/supabaseClient";
 const AuthContext = createContext();
-
-export function useAuth() {
-  return useContext(AuthContext);
-}
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [uniqueId, setUniqueId] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
   const [authenticatedState, setAuthenticatedState] =
     useState("not-authenticated");
 
   async function checkUser() {
-    const user = await auth.currentUser;
-    if (user) {
-      getUserProfile(setCurrentUser, user.uid);
-      setAccessToken(user.accessToken);
+    const userData = await supabase.auth.getUser();
+    if (userData) {
+      setCurrentUser(userData.data.user);
     }
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUniqueId(user.uid);
-        setAuthenticatedState("authenticated");
-      } else {
-        setCurrentUser(null);
-        setUniqueId(null);
-        setAccessToken(null);
-        setAuthenticatedState("not-authenticated");
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          setAuthenticatedState("authenticated");
+        }
+        if (event === "SIGNED_OUT") {
+          setAuthenticatedState("not-authenticated");
+          setCurrentUser(null);
+        }
       }
-    });
-    return unsubscribe;
+    );
   }, []);
 
   useEffect(() => {
@@ -43,9 +34,13 @@ export function AuthProvider({ children }) {
 
   let sharedState = {
     currentUser,
-    uniqueId,
   };
+
   return (
     <AuthContext.Provider value={sharedState}>{children}</AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
 }
