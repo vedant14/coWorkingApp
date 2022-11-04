@@ -2,7 +2,6 @@ export * from "./Layout";
 export * from "./PrivateLayout";
 export * from "./PageLoader";
 export * from "./UserAvailabilityComponent";
-export * from "./BookingPage";
 export * from "./SplitLayout";
 export * from "./BookingLayout";
 

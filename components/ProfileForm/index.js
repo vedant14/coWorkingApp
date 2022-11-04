@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-// import {
-//   updateUserProfile,
-//   uploadUserProfilePic,
-// } from "../../utils/firebasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { InputTextArea } from "../atoms/inputTextArea";
 import { MultiSelectOptions } from "../atoms/multiSelect";

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { updateBrand } from "../../utils/firebasePostRequests";
 import { createLocation } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";

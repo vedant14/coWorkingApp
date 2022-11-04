@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { AvailabilityInput } from "./availabilityInput";
 import { useAuth } from "../../context/AuthContext";
-import { saveSlotData } from "../../utils/firebasePostRequests";
 
 export function UserAvailabilityComponent({ editData }) {
   const { currentUser } = useAuth();
@@ -39,7 +38,7 @@ export function UserAvailabilityComponent({ editData }) {
   };
   const [userAvailability, setUserAvailability] = useState(slotData);
   function callSaveSlotData() {
-    saveSlotData(currentUser.id, userAvailability, Store);
+    // saveSlotData(currentUser.id, userAvailability, Store);
   }
 
   useEffect(() => {

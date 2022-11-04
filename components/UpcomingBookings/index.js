@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-// import {
-//   getTodayUserBookings,
-//   getUpcomingUserBookings,
-// } from "../../utils/firebaseGetRequests";
 import { displayDate, displaySlotData } from "../../utils/helperFunctions";
 
 export function UpcomingBookings({ today }) {
