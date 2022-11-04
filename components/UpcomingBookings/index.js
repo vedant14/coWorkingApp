@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import {
-  getTodayUserBookings,
-  getUpcomingUserBookings,
-} from "../../utils/firebaseGetRequests";
+// import {
+//   getTodayUserBookings,
+//   getUpcomingUserBookings,
+// } from "../../utils/firebaseGetRequests";
 import { displayDate, displaySlotData } from "../../utils/helperFunctions";
 
 export function UpcomingBookings({ today }) {
@@ -12,9 +12,9 @@ export function UpcomingBookings({ today }) {
 
   useEffect(() => {
     if (today === true) {
-      getTodayUserBookings(currentUser.id, setBookingData);
+      // getTodayUserBookings(currentUser.id, setBookingData);
     } else {
-      getUpcomingUserBookings(currentUser.id, setBookingData);
+      // getUpcomingUserBookings(currentUser.id, setBookingData);
     }
   }, [currentUser]);
 

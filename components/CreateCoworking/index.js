@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { updateBrand } from "../../utils/firebasePostRequests";
+// import { updateBrand } from "../../utils/firebasePostRequests";
 import { createBrand } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
-import { postDeleteBrand } from "../../utils/firebaseDeleteRequests";
+// import { postDeleteBrand } from "../../utils/firebaseDeleteRequests";
 export function CreateCoworking({ brandId, brandData }) {
   const [name, setName] = useState(brandData ? brandData.name : "");
   const { currentUser } = useAuth();
@@ -18,7 +18,7 @@ export function CreateCoworking({ brandId, brandData }) {
       );
     } else {
       if (brandData) {
-        updateBrand({ name, brandId });
+        // updateBrand({ name, brandId });
       } else {
         createBrand(name, currentUser.id, function (response) {
           // toastNotification(response, "HEY", )
@@ -29,7 +29,7 @@ export function CreateCoworking({ brandId, brandData }) {
 
   function callDeleteBrand(e) {
     e.preventDefault;
-    postDeleteBrand(brandId);
+    // postDeleteBrand(brandId);
     toastNotification("Deleted", "All locations as well", "success");
   }
   return (

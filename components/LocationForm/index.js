@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { updateBrand } from "../../utils/firebasePostRequests";
+// import { updateBrand } from "../../utils/firebasePostRequests";
 import { createLocation } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
@@ -17,7 +17,7 @@ export function LocationForm({ brandId, locationId, locationData }) {
       );
     } else {
       if (locationData) {
-        updateBrand({ name, brandId });
+        // updateBrand({ name, brandId });
       } else {
         createLocation(name, currentUser.id, brandId, function (response) {
           // toastNotification(response)
