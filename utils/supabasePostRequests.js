@@ -70,7 +70,6 @@ export async function createOrder(phone, brand_id, locationId, callback) {
       },
     ])
     .select();
-  console.log("Hi");
   if (error) {
     return callback(error);
   } else return callback(data.id);

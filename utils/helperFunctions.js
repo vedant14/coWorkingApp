@@ -68,3 +68,15 @@ export function incrementArray(array, start, end) {
     });
   }
 }
+export function passEnum(id) {
+  switch (id) {
+    case 1:
+      return "Daily";
+    case 2:
+      return "Weekly";
+    case 3:
+      return "Monthly";
+    default:
+      return "NO";
+  }
+}

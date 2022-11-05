@@ -85,3 +85,32 @@ export async function getPublicBrandData(slug, callback) {
     return callback(brands[0]);
   }
 }
+
+export async function getAllBookings(uniqueId, callback) {
+  var brandIDs = [];
+  getAdminBrandData(uniqueId, function (data) {
+    data.map((item) => {
+      brandIDs.push(item.brands.id);
+      getBookingsFromBrands(brandIDs, function (response) {
+        return callback(response);
+      });
+    });
+  });
+}
+
+async function getBookingsFromBrands(brandArray, callback) {
+  let { data: bookings, error } = await supabase
+    .from("bookings")
+    .select(`*, brands(name)`)
+    .in("brand_id", brandArray)
+    .order("inserted_at", { ascending: false });
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(bookings);
+  }
+}
+
+// each user can have multiple brand_users
+// each brand_user has one brand
+// each brand has multiple bookings

@@ -1,34 +1,6 @@
-import { randomIntFromInterval } from "../../utils/helperFunctions";
+import { passEnum, randomIntFromInterval } from "../../utils/helperFunctions";
 
-const people = [
-  {
-    name: "Vedant",
-    phone: "9767137428",
-    bookingDate: "21-2-22",
-    expiryDate: "22-2-22",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    passType: "Daily",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Mahalakshmi",
-    phone: "9767137428",
-    bookingDate: "21-2-22",
-    expiryDate: "22-2-22",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    passType: "Monthly",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  // More people...
-];
-
-export function BookingsLayout() {
+export function BookingsLayout({ bookingData }) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -47,6 +19,12 @@ export function BookingsLayout() {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
+                    Brands and Locations
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
                     Booking Date
                   </th>
                   <th
@@ -59,13 +37,13 @@ export function BookingsLayout() {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    No. of passes
+                    No. of seats
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    For days
+                    No. of passes
                   </th>
                   <th
                     scope="col"
@@ -76,38 +54,41 @@ export function BookingsLayout() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr key={person.email}>
+                {bookingData.map((item) => (
+                  <tr key={item.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {item.booking_name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {item.booking_email}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {item.booking_phone}
+                      </div>
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {person.name}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {person.email}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {person.phone}
-                          </div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {item.brands.name}
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                        {person.bookingDate}
+                        {item.start_date}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        {person.passType}
+                        {passEnum(item.pass_type)}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {randomIntFromInterval(1, 10)}
+                      {item.seat_count}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {randomIntFromInterval(1, 10)}
+                      {item.pass_count}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {randomIntFromInterval(1, 10)}

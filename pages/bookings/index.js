@@ -1,38 +1,34 @@
 import { useEffect, useState } from "react";
 import {
   BookingsLayout,
+  NoDataPage,
   PageHeading,
   PageLoader,
   PrivateLayout,
 } from "../../components";
 import { useAuth } from "../../context/AuthContext";
+import { getAllBookings } from "../../utils/supabaseGetRequests";
 
 export default function Bookings() {
   const [bookingData, setBookingData] = useState(null);
   const { currentUser } = useAuth();
 
-  useEffect(
-    () => ({
-      if(currentUser) {
-        getAllBookings(currentUser, function (data) {
-          setBookingData(data);
-        });
-      },
-    }),
-    [currentUser]
-  );
+  useEffect(() => {
+    if (currentUser) {
+      getAllBookings(currentUser.id, function (data) {
+        setBookingData(data);
+      });
+    }
+  }, [currentUser]);
 
   if (bookingData === false) {
-    return <NoBookings />;
+    return <NoDataPage />;
   } else if (!bookingData) {
     return <PageLoader />;
   } else {
     return <BookingsPage />;
   }
 
-  function NoBookings() {
-    return <div>No Bookings</div>;
-  }
   function BookingsPage() {
     return (
       <PrivateLayout>
@@ -41,7 +37,7 @@ export default function Bookings() {
           primaryLink="/bookings/offline-booking"
           primaryText="Offline Booking"
         />
-        <BookingsLayout />
+        <BookingsLayout bookingData={bookingData} />
       </PrivateLayout>
     );
   }

@@ -29,7 +29,7 @@ export function CheckoutForm({ bookingData }) {
       setLoader(true);
       makePayment(bookingData, setLoader, setModal);
     } else {
-      console.log("Please ensure that name, email and the service is selected");
+      // console.log("Please ensure that name, email and the service is selected");
     }
   }
 
