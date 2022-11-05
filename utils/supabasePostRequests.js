@@ -75,3 +75,34 @@ export async function createOrder(phone, brand_id, locationId, callback) {
     return callback(error);
   } else return callback(data.id);
 }
+
+export async function createBooking(
+  brandId,
+  locationId,
+  name,
+  phone,
+  email,
+  passCount,
+  seatCount,
+  passType,
+  uniqueId,
+  callback
+) {
+  // check for user admin
+  const { data, error } = await supabase.from("bookings").insert([
+    {
+      brand_id: brandId,
+      booking_name: name,
+      booking_phone: phone,
+      booking_email: email,
+      location_id: locationId,
+      pass_count: passCount,
+      seat_count: seatCount,
+      pass_type: passType,
+      created_by: uniqueId,
+    },
+  ]);
+  if (error) {
+    return callback(error);
+  } else return callback(true);
+}

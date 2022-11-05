@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AvailabilityInput } from "./availabilityInput";
 import { useAuth } from "../../context/AuthContext";
+import { Card } from "../atoms/card";
 
 export function UserAvailabilityComponent({ editData }) {
   const { currentUser } = useAuth();
@@ -48,25 +49,27 @@ export function UserAvailabilityComponent({ editData }) {
   }, [editData]);
 
   return (
-    <div>
-      <div className="border mt-6 px-10 py-2 border-neutral-200 max-w-2xl rounded-md">
-        <div className="mx-auto divide-y divide-solid">
-          {slotInputDays.map((day, i) => (
-            <AvailabilityInput
-              key={i}
-              day={day}
-              userAvailability={userAvailability}
-              setUserAvailability={setUserAvailability}
-            />
-          ))}
+    <Card>
+      <div className="p-6">
+        <div className="max-w-2xl">
+          <div className="mx-auto divide-y divide-solid">
+            {slotInputDays.map((day, i) => (
+              <AvailabilityInput
+                key={i}
+                day={day}
+                userAvailability={userAvailability}
+                setUserAvailability={setUserAvailability}
+              />
+            ))}
+          </div>
         </div>
+        <button
+          className="inline-flex justify-center my-5 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dark-green"
+          onClick={() => callSaveSlotData()}
+        >
+          Save Schedule
+        </button>
       </div>
-      <button
-        className="inline-flex justify-center my-5 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dark-green"
-        onClick={() => callSaveSlotData()}
-      >
-        Save Schedule
-      </button>
-    </div>
+    </Card>
   );
 }

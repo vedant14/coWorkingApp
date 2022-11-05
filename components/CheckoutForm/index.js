@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrandButton } from "../atoms/brandButton";
-import { DropDown } from "./dropDown";
+import { DropDown } from "../atoms/dropDown";
 import { InputText } from "./inputText";
 import { PageLoaderSpinner } from "./pageLoader";
 import { SuccessModal } from "./successModal";
@@ -8,10 +8,10 @@ import { makePayment } from "../../utils/paymentCalls";
 import passArray from "../../data/passArray.json";
 import { incrementArray } from "../../utils/helperFunctions";
 
-var quanityArray = [];
+var passCountArray = [];
 var seatsArray = [];
 
-incrementArray(quanityArray, 1, 30);
+incrementArray(passCountArray, 1, 30);
 incrementArray(seatsArray, 1, 10);
 
 export function CheckoutForm({ bookingData }) {
@@ -19,13 +19,13 @@ export function CheckoutForm({ bookingData }) {
   const [selectedLocation, setSelectedLocation] = useState(
     bookingData.locations[0]
   );
-  const [selectedQuantity, setSelectedQuantity] = useState(quanityArray[10]);
+  const [passCount, setPassCount] = useState(passCountArray[10]);
   const [selectedSeats, setSelectedSeats] = useState(seatsArray[0]);
   const [modal, setModal] = useState(false);
   const [loader, setLoader] = useState(false);
   var label = `No. of ${selectedPass.metric}`;
   function callPaymentGateway() {
-    if (selectedPass && selectedLocation && selectedQuantity) {
+    if (selectedPass && selectedLocation && passCount) {
       setLoader(true);
       makePayment(bookingData, setLoader, setModal);
     } else {
@@ -68,9 +68,9 @@ export function CheckoutForm({ bookingData }) {
         <DropDown
           type="Quanity"
           label={label}
-          optionsArray={quanityArray}
-          selected={selectedQuantity}
-          setSelected={setSelectedQuantity}
+          optionsArray={passCountArray}
+          selected={passCount}
+          setSelected={setPassCount}
         />
         <div className="mt-6 pt-6 border-t space-y-2">
           <div className="flex justify-between">
@@ -87,7 +87,7 @@ export function CheckoutForm({ bookingData }) {
           </div>
           <div className="flex justify-between">
             <div>{label}</div>
-            <div> {selectedQuantity.name}</div>
+            <div> {passCount.name}</div>
           </div>
           <div
             className="flex justify-between border-t pt-2 font-medium

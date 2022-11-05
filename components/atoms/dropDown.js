@@ -14,7 +14,7 @@ export function DropDown({ type, label, optionsArray, selected, setSelected }) {
       </label>
       <Menu as="div" className="relative w-full inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+          <Menu.Button className="inline-flex items-center w-full justify-between rounded-md border border-gray-300 bg-white px-4 h-10 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
             <div className="inline-flex items-center">
               {type === "location" ? (
                 <LocationMarkerIcon className="h-4 mr-3" />
@@ -23,7 +23,7 @@ export function DropDown({ type, label, optionsArray, selected, setSelected }) {
               )}
               <p>{!selected ? "Options" : selected.name} </p>
             </div>
-            <img src="/icons/display/arrow-up-down.svg" className="mr-2" />
+            <img src="/icons/display/arrow-up-down.svg" className="mr-2 h-4" />
           </Menu.Button>
         </div>
 

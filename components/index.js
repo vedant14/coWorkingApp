@@ -3,7 +3,6 @@ export * from "./PrivateLayout";
 export * from "./PageLoader";
 export * from "./UserAvailabilityComponent";
 export * from "./SplitLayout";
-export * from "./BookingLayout";
 
 export * from "./ServiceList";
 export * from "./UpcomingBookings";
@@ -18,3 +17,5 @@ export * from "./LocationForm";
 export * from "./BrandShowCase";
 export * from "./BrandInfoPage";
 export * from "./CheckoutForm";
+export * from "./BookingsLayout";
+export * from "./OfflineForm";

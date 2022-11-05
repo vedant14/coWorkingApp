@@ -11,7 +11,7 @@ export function InputText({
 }) {
   return (
     <div className="w-full">
-      <label className="block text-sm text-neutral-400 sm:mt-px sm:pt-2">
+      <label className="block text-sm text-neutral-400 sm:mt-px sm:pt-2 mb-2">
         {label}
       </label>
       <div className="flex items-center space-x-1">
@@ -19,13 +19,11 @@ export function InputText({
         <input
           id={id}
           name={id}
-          type={type}
+          type={type ? type : "text"}
           className={classNames(
             width === "full" ? "w-full" : "w-full max-w-lg",
-            addText
-              ? "text-xs border-b border-neutral-100"
-              : "sm:text-sm mt-2 px-3 h-10 border border-neutral-100 rounded",
-            "appearance-none bg-neutral-50 block  placeholder-gray-500 text-neutral-700 focus:outline-none focus:ring-dark-green focus:border-dark-green focus:z-10 "
+            addText ? "text-xs" : "sm:text-sm mt-2 px-3 h-10",
+            "appearance-none rounded-md border border-gray-300 bg-neutral-50 block  placeholder-gray-500 text-neutral-700 focus:outline-none focus:ring-dark-green focus:border-dark-green focus:z-10 "
           )}
           placeholder={placeholder}
           value={value}
