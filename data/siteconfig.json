@@ -21,6 +21,13 @@
     "merchant": true
   },
   {
+    "name": "Attendances",
+    "inactiveIcon": "/icons/menu-inactive/calendar.svg",
+    "activeIcon": "/icons/menu-active/calendar.svg",
+    "link": "/attendances",
+    "merchant": true
+  },
+  {
     "name": "Schedule",
     "inactiveIcon": "/icons/menu-inactive/calendar.svg",
     "activeIcon": "/icons/menu-active/calendar.svg",
