@@ -19,4 +19,4 @@ export * from "./BrandInfoPage";
 export * from "./CheckoutForm";
 export * from "./BookingsLayout";
 export * from "./OfflineForm";
-export * from "./AttendanceTable";
+export * from "./AttendanceLayout";

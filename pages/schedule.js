@@ -18,7 +18,7 @@ export default function SchedulePage() {
 
   return (
     <PrivateLayout>
-      <PageHeading name="Schedule" subtext="Set Your Weekly Hours" />
+      <PageHeading name="Schedule" subText="Set Your Weekly Hours" />
       <UserAvailabilityComponent editData={editData} />
     </PrivateLayout>
   );

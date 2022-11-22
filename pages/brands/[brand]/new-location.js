@@ -39,7 +39,7 @@ export default function NewLocation() {
     ];
     return (
       <PrivateLayout>
-        <PageHeading name="New Location" breadcrumbs={breadCrumbsData} />
+        <PageHeading name="New Location" breadCrumbs={breadCrumbsData} />
         <LocationForm brandId={brand} />
       </PrivateLayout>
     );

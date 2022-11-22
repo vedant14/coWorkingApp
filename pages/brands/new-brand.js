@@ -9,7 +9,7 @@ export default function Dashboard() {
   ];
   return (
     <PrivateLayout>
-      <PageHeading name="Create a new brand" breadcrumbs={breadcrumbData} />
+      <PageHeading name="Create a new brand" breadCrumbs={breadcrumbData} />
       <CreateCoworking />
     </PrivateLayout>
   );

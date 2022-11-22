@@ -42,8 +42,8 @@ export default function BrandPage() {
       <PrivateLayout>
         <PageHeading
           name={brandData.name}
-          subtext="All information of this brand"
-          breadcrumbs={breadCrumbsData}
+          subText="All information of this brand"
+          breadCrumbs={breadCrumbsData}
           secondaryLink={`/brands/${brand}/edit`}
           secondaryText="Edit Brand"
         />

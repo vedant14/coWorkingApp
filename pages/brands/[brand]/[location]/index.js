@@ -43,7 +43,7 @@ export default function BrandPage() {
       <PrivateLayout>
         <PageHeading
           name={locationData.name}
-          breadcrumbs={breadCrumbsData}
+          breadCrumbs={breadCrumbsData}
           primaryText="Add Schedule"
           primaryLink={`/brands/${location}/new-location`}
           secondaryLink={`/brands/${brand}/${location}/edit`}

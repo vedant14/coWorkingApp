@@ -4,8 +4,8 @@ import { CustomBreadcrumb } from "../atoms/customBreadCrumb";
 
 export function PageHeading({
   name,
-  subtext,
-  breadcrumbs,
+  subText,
+  breadCrumbs,
   primaryText,
   primaryLink,
   secondaryText,
@@ -19,9 +19,9 @@ export function PageHeading({
         <nav className="hidden sm:flex" aria-label="Breadcrumb">
           <ol role="list" className="flex items-center mb-2 space-x-4">
             <CustomBreadcrumb name="Dashboard" link="/dashboard" />
-            {breadcrumbs && (
+            {breadCrumbs && (
               <>
-                {breadcrumbs.map((item, i) => (
+                {breadCrumbs.map((item, i) => (
                   <CustomBreadcrumb name={item.name} link={item.link} key={i} />
                 ))}
               </>
@@ -37,7 +37,7 @@ export function PageHeading({
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
             {name}
           </h2>
-          <p className="text-neutral-500"> {subtext}</p>
+          <p className="text-neutral-500"> {subText}</p>
         </div>
         <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
           {secondaryLink && (

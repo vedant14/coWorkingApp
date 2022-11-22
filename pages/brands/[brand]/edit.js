@@ -38,7 +38,7 @@ export default function Edit() {
     ];
     return (
       <PrivateLayout>
-        <PageHeading name="Edit" breadcrumbs={breadCrumbsData} />
+        <PageHeading name="Edit" breadCrumbs={breadCrumbsData} />
         <CreateCoworking brandId={brand} brandData={brandData} />
       </PrivateLayout>
     );

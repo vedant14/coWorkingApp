@@ -5,7 +5,6 @@ import { getPublicBrandData } from "../../../utils/supabaseGetRequests";
 export default function MentorPage() {
   const router = useRouter();
   const [bookingData, setBookingData] = useState(null);
-  const [currentStep, setCurrentStep] = useState(0);
   const { booking } = router.query;
   useEffect(() => {
     if (booking) {

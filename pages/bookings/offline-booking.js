@@ -46,8 +46,8 @@ export default function OfflineBooking() {
       <PrivateLayout>
         <PageHeading
           name="Create offline booking"
-          subtext="Cash payments/etc."
-          breadcrumbs={breadCrumbs}
+          subText="Cash payments/etc."
+          breadCrumbs={breadCrumbs}
         />
         <OfflineForm brandData={brandData} />
       </PrivateLayout>
