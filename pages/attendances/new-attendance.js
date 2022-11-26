@@ -1,4 +1,4 @@
-import { PageHeading, PrivateLayout } from "../../components";
+import { AttendanceForm, PageHeading, PrivateLayout } from "../../components";
 
 export default function NewAttendancePage() {
   const breadCrumbs = [
@@ -9,8 +9,12 @@ export default function NewAttendancePage() {
   ];
   return (
     <PrivateLayout>
-      <PageHeading name="New Attendance" breadCrumbs={breadCrumbs} />
-      <div>Aaa</div>
+      <PageHeading
+        name="New Attendance"
+        breadCrumbs={breadCrumbs}
+        subText="Add a new attendance"
+      />
+      <AttendanceForm />
     </PrivateLayout>
   );
 }

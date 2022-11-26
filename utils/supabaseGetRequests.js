@@ -111,6 +111,35 @@ async function getBookingsFromBrands(brandArray, callback) {
   }
 }
 
+export async function getBookingFromSearch(searchString, callback) {
+  let pattern = /@/g;
+  let filterByEmail = null;
+  let filterByPhone = null;
+  let result = pattern.test(searchString);
+
+  if (result) {
+    filterByEmail = searchString;
+  } else {
+    filterByPhone = searchString;
+  }
+  let query = supabase
+    .from("bookings")
+    .select(`*, brands(name)`)
+    .order("inserted_at", { ascending: false });
+  if (filterByEmail) {
+    query = query.eq("booking_email", filterByEmail);
+  }
+  if (filterByPhone) {
+    query = query.eq("booking_phone", filterByPhone);
+  }
+  let { data: bookings, error } = await query;
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(bookings);
+  }
+}
+
 // each user can have multiple brand_users
 // each brand_user has one brand
 // each brand has multiple bookings

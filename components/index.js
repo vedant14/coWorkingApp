@@ -20,3 +20,4 @@ export * from "./CheckoutForm";
 export * from "./BookingsLayout";
 export * from "./OfflineForm";
 export * from "./AttendanceLayout";
+export * from "./AttendanceForm";
