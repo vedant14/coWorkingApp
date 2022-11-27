@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { passEnum, randomIntFromInterval } from "../../utils/helperFunctions";
-import { CustomModal } from "../atoms/customModal";
+import { EntryModal } from "./entryModal";
 
-export function BookingsLayout({ bookingData, type }) {
+export function BookingsLayout({ bookingData }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState(null);
   function confirmAttendance(e, data) {
@@ -10,15 +10,16 @@ export function BookingsLayout({ bookingData, type }) {
     setModalOpen(true);
     setSelectedBrand(data);
   }
-  console.log(selectedBrand);
+
   return (
     <>
-      <CustomModal
+      <EntryModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         headerText="Confirm addition of attendance?"
         subText="Confirming here will consume one booking for this user"
         primaryActionText="Add Entry"
+        brandData={selectedBrand}
       />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -113,7 +114,7 @@ export function BookingsLayout({ bookingData, type }) {
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
                         <a
-                          className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium cursor-pointer rounded-full text-gray-700 bg-white hover:bg-dark-green hover:text-light-green hover:border-dark-green"
+                          className="inline-flex items-center shadow-sm px-2.5 py-1.5 border border-gray-300 text-sm leading-5 font-medium cursor-pointer rounded-md text-gray-700 bg-white hover:bg-dark-green hover:text-light-green hover:border-dark-green"
                           onClick={(e) => confirmAttendance(e, item)}
                         >
                           Add Attendance

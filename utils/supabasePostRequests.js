@@ -105,3 +105,18 @@ export async function createBooking(
     return callback(error);
   } else return callback(true);
 }
+
+export async function postNewEntry(postData, uniqueId, callback) {
+  const { error } = await supabase.from("attendances").insert([
+    {
+      booking_id: postData.bookingId,
+      location_id: postData.locationId,
+      created_by: uniqueId,
+      seat_count: postData.seatCount,
+    },
+  ]);
+  // TODO: Reduce count
+  if (error) {
+    return callback(error);
+  } else return callback(true);
+}
