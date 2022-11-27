@@ -143,3 +143,17 @@ export async function getBookingFromSearch(searchString, callback) {
 // each user can have multiple brand_users
 // each brand_user has one brand
 // each brand has multiple bookings
+
+export async function getAdminAttendanceData(uniqueId, callback) {
+  let { data: attendances, error } = await supabase
+    .from("attendances")
+    .select(
+      `*, bookings(booking_name, booking_phone, booking_email, brands(name)), locations(*))`
+    );
+  // .eq("user_id", uniqueId);
+  if (error) {
+    return callback(error);
+  } else {
+    return callback(attendances);
+  }
+}

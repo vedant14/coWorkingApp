@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { passEnum, randomIntFromInterval } from "../../utils/helperFunctions";
-
-export function AttendanceLayout({ bookingData }) {
+export function AttendanceLayout({ attendanceData }) {
+  console.log(attendanceData);
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -37,35 +36,35 @@ export function AttendanceLayout({ bookingData }) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {bookingData.map((item) => (
+                {attendanceData.map((item) => (
                   <tr key={item.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <Link
-                        href={`/bookings/${item.bookingId}`}
+                        href={`/bookings/${item.booking_id}`}
                         target="_blank"
                       >
                         <div className="text-sm font-medium text-gray-700 underline cursor-pointer">
-                          {item.bookingId}
+                          {item.booking_id}
                         </div>
                       </Link>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
-                        {item.bookingName}
+                        {item.bookings.booking_name}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {item.bookingEmail}
+                        {item.bookings.booking_email}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {item.bookingPhone}
+                        {item.bookings.booking_phone}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
-                        {item.brands.name}
+                        {item.bookings.brands.name}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {item.brands.location}
+                        {item.locations?.name}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">

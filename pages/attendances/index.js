@@ -1,27 +1,42 @@
-import { AttendanceLayout, PageHeading, PrivateLayout } from "../../components";
+import { useEffect, useState } from "react";
+import {
+  AttendanceLayout,
+  NoDataPage,
+  PageHeading,
+  PageLoader,
+  PrivateLayout,
+} from "../../components";
+import { useAuth } from "../../context/AuthContext";
+import { getAdminAttendanceData } from "../../utils/supabaseGetRequests";
 
-const bookingData = [
-  {
-    id: 1,
-    bookingId: 1,
-    bookingName: "Vedant",
-    bookingEmail: "vedant@gmail.com",
-    bookingPhone: "9767137428",
-    brands: {
-      name: "First Brand",
-      location: "Location",
-    },
-  },
-];
 export default function AttendancePage() {
-  return (
-    <PrivateLayout>
-      <PageHeading
-        name="Attendances"
-        primaryText="New Entry"
-        primaryLink="/attendances/new-attendance"
-      />
-      <AttendanceLayout bookingData={bookingData} />
-    </PrivateLayout>
-  );
+  const [attendanceData, setAttendanceData] = useState(null);
+  const { currentUser } = useAuth();
+  useEffect(() => {
+    if (currentUser) {
+      getAdminAttendanceData(currentUser.id, function (fetchedData) {
+        if (fetchedData) {
+          setAttendanceData(fetchedData);
+        }
+      });
+    }
+  }, [currentUser]);
+  if (!attendanceData) {
+    return <NoDataPage />;
+  } else if (attendanceData === null) {
+    return <PageLoader />;
+  } else return <ShowAttendancePage />;
+
+  function ShowAttendancePage() {
+    return (
+      <PrivateLayout>
+        <PageHeading
+          name="Attendances"
+          primaryText="New Entry"
+          primaryLink="/attendances/new-attendance"
+        />
+        <AttendanceLayout attendanceData={attendanceData} />
+      </PrivateLayout>
+    );
+  }
 }
