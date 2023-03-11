@@ -3,9 +3,11 @@ import { createLocation } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
+import { useRouter } from 'next/router';
 export function LocationForm({ brandId, locationId, locationData }) {
   const [name, setName] = useState("");
   const { currentUser } = useAuth();
+  const router = useRouter();
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "" && brandId && currentUser.id) {
@@ -19,7 +21,9 @@ export function LocationForm({ brandId, locationId, locationData }) {
         // updateBrand({ name, brandId });
       } else {
         createLocation(name, currentUser.id, brandId, function (response) {
-          // toastNotification(response)
+          if(response === true) {
+            router.push('/brands/'+brandId)
+          }
         });
       }
     }

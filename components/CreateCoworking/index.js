@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 export function CreateCoworking({ brandId, brandData }) {
   const [name, setName] = useState(brandData ? brandData.name : "");
   const { currentUser } = useAuth();
-  const router = useRouter()
+  const router = useRouter();
 
   function callCreateBrand(e) {
     e.preventDefault();
