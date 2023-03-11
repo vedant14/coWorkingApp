@@ -3,9 +3,13 @@ import { createBrand } from "../../utils/supabasePostRequests";
 import { InputText } from "../atoms/inputText";
 import { useAuth } from "../../context/AuthContext";
 import { toastNotification } from "../atoms/toastNotification";
+import { useRouter } from 'next/router'
+
 export function CreateCoworking({ brandId, brandData }) {
   const [name, setName] = useState(brandData ? brandData.name : "");
   const { currentUser } = useAuth();
+  const router = useRouter()
+
   function callCreateBrand(e) {
     e.preventDefault();
     if (name === "") {
@@ -19,7 +23,9 @@ export function CreateCoworking({ brandId, brandData }) {
         // updateBrand({ name, brandId });
       } else {
         createBrand(name, currentUser.id, function (response) {
-          // toastNotification(response, "HEY", )
+          if(response === true){
+            router.push('/brands')
+          }
         });
       }
     }

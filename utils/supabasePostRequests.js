@@ -20,7 +20,7 @@ export async function createBrand(name, uniqueId, callback) {
 }
 
 async function createBrandUser(brandId, uniqueId, callback) {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("brand_users")
     .insert([{ brand_id: brandId, user_id: uniqueId, created_by: uniqueId }]);
   if (error) {
@@ -31,7 +31,7 @@ async function createBrandUser(brandId, uniqueId, callback) {
 }
 
 export async function createLocation(name, uniqueId, brand_id, callback) {
-  const { data, error } = await supabase.from("locations").insert([
+  const {  error } = await supabase.from("locations").insert([
     {
       name: name,
       brand_id: brand_id,
@@ -49,7 +49,7 @@ export async function createLocation(name, uniqueId, brand_id, callback) {
 
 export async function updateSlug(uniqueId, brand_id, slug, callback) {
   // check for user admin
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("brands")
     .update({ slug: slugify(slug) })
     .eq("id", brand_id);
